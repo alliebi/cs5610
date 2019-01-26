@@ -27,16 +27,3 @@ app.set('port', port);
 // Create HTTP server
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
-
-/*var dbServer = require('./test-mongodb/app');
-dbServer(app);*/
-
-//require('./test-mongodb/app')(app);
-
-
-// For Build: Catch all other routes and return the index file -- BUILDING
-/*
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-*/
