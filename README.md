@@ -1,4 +1,4 @@
-I am a graduate student at Northeastern University. I worked on a full stack web development projct using React in the summer. 
+Hello, I am a graduate student at Northeastern University. I worked on a full stack web development projct using React in the summer. 
 This repo is a personal repo for CS5610 Web Development project. 
 
 Useful Links:
@@ -8,6 +8,12 @@ https://dashboard.heroku.com/apps/webdev-anqi-cs5610
 2. Link to your project (later...)
 
 3. Link to your assignment (later...)
+
+
+
+
+
+
 
 
 
