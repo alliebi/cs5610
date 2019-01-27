@@ -1,3 +1,18 @@
+I am a graduate student at Northeastern University. I worked on a full stack web development projct using React in the summer. 
+This repo is a personal repo for CS5610 Web Development project. 
+
+Useful Links:
+1. Root to the hosted environment on Heroku 
+https://dashboard.heroku.com/apps/webdev-anqi-cs5610
+
+2. Link to your project (later...)
+
+3. Link to your assignment (later...)
+
+
+
+
+
 # MyProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
