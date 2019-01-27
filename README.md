@@ -1,4 +1,5 @@
-Hello, I am a graduate student at Northeastern University. I worked on a full stack web development projct using React in the summer. 
+Hello, I am a graduate student at Northeastern University. I worked on a full stack web development project using React in the summer. 
+
 This repo is a personal repo for CS5610 Web Development project. 
 
 Useful Links:
