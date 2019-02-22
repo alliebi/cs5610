@@ -1,0 +1,24 @@
+
+<div *ngIf="widget !== undefined" [ngSwitch]="widget.widgetType">
+    <div *ngSwitchCase="'HEADING'">
+        <app-widget-heading></app-widget-heading>
+    </div>
+    <div *ngSwitchCase="'IMAGE'">
+        <app-widget-image></app-widget-image>
+    </div>
+    <div *ngSwitchCase="'YOUTUBE'">
+        <app-widget-youtube></app-widget-youtube>
+    </div>
+</div>
+
+<!--<div *ngIf="widget === undefined" [ngSwitch]="widgetChosen">-->
+    <!--<div *ngSwitchCase="'HEADING'">-->
+        <!--<app-widget-header></app-widget-header>-->
+    <!--</div>-->
+    <!--<div *ngSwitchCase="'IMAGE'">-->
+        <!--<app-widget-image></app-widget-image>-->
+    <!--</div>-->
+    <!--<div *ngSwitchCase="'YOUTUBE'">-->
+        <!--<app-widget-youtube></app-widget-youtube>-->
+    <!--</div>-->
+<!--</div>-->

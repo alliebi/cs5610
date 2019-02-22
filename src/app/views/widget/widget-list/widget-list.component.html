@@ -1,0 +1,66 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="col-4">
+            <div class="container-fluid">
+                <a [routerLink]="['/user', uid, 'website', wid, 'page']" class="navbar-link cl-text-black cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                </a>
+                <a class="navbar-brand cl-text-bold cl-text-black" href="#">
+                    Pages
+                </a>
+            </div>
+        </div>
+        <div class="float-right">
+            <a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', 'new']" class="cl-text-black cl-icon-padding">
+                <i class="fas fa-plus fontawsome_icon"></i>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class=" container-fluid cl-container-padding">
+    <!--<ul>-->
+        <!--<li *ngFor="let widget of widgets">-->
+            <!--<a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', widget._id]" class="cl-text-black">-->
+                <!--{{widget.widgetType}}-->
+            <!--</a>-->
+            <!--<a [routerLink]="['/user', uid, 'website', wid, 'page', pid]">-->
+                <!--<i class="fas fa-cog fontawsome_icon float-right"></i>-->
+            <!--</a>-->
+        <!--</li>-->
+
+    <!--</ul>-->
+    <div *ngFor="let widget of widgets" [ngSwitch]="widget.widgetType">
+        <a routerLink="./" class="float-right text-black">
+            <i class="fas fa-bars"></i>
+        </a>
+        <a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', widget._id]" class="float-right text-blue">
+            <i class="fas fa-cog"></i>
+        </a>
+        <h1 *ngSwitchCase="'HEADING'">{{ widget.text }}</h1>
+        <img *ngSwitchCase="'IMAGE'" [src]="widget.url" alt="">
+        <iframe *ngSwitchCase="'YOUTUBE'" width="640" height="360" [src]="widget.url|safe" rameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <!--<object *ngSwitchCase="'HTML'" data="html/{{ widget.text }}"></object>-->
+        <p *ngSwitchDefault><br><br></p>
+    </div>
+</div>
+
+<nav class="navbar fixed-bottom bg-light">
+    <div class="float-left navbar-text">
+        <a href="#" class="cl-icon-padding cl-text-black">
+            <i class="fas fa-play"></i>
+        </a>
+        <a href="#" class="cl-icon-padding cl-text-black">
+            <i class="far fa-eye"></i>
+        </a>
+    </div>
+    <div class="float-right">
+        <a [routerLink]="['/user', uid]" class="navbar-link navbar-text float-right cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
+</nav>
+
+
