@@ -62,10 +62,11 @@
                 <div class="file-upload">
                     <input type="file"
                            id="avatar" name="avatar"
-                           accept="image/png, image/jpeg">
+                           accept="image/png, image/jpeg"
+                           (change)="handleUpload($event)">
                 </div>
             </div>
-            <button class="btn btn-primary btn-block">Upload Image</button>
+            <button class="btn btn-primary btn-block" >Upload Image</button>
             <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
         </div>
     </form>

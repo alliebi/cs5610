@@ -17,8 +17,11 @@ export class WidgetImageComponent implements OnInit {
     newWidgetName: string;
     newWidgetWidth = '';
     newWidgetURL = '';
+    localPath: string;
+    URL: string;
 
     constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
+        this.newWidget = new WidgetImage(this.newWidgetName, '', 'IMAGE', '', this.newWidgetWidth, '');
     }
 
     ngOnInit() {
@@ -36,7 +39,8 @@ export class WidgetImageComponent implements OnInit {
     }
 
     onUpdateWidget() {
-        this.newWidget = new WidgetImage(this.newWidgetName, '', 'IMAGE', '', this.newWidgetWidth, this.newWidgetURL);
+        this.URL = ((this.newWidgetURL === 'undefined') ? this.localPath : this.newWidgetURL);
+        this.newWidget.url = this.URL;
         this.widgetService.updateWidget(this.widgetId, this.newWidget);
         this.router.navigate(['../'], {relativeTo: this.route});
     }
@@ -44,5 +48,11 @@ export class WidgetImageComponent implements OnInit {
     onDelete() {
         this.widgetService.deleteWidget(this.widgetId);
         this.router.navigate(['../'], {relativeTo: this.route});
+    }
+
+
+    handleUpload(e: any): void {
+        this.localPath = e.target.value;
+        console.log('local:  ' + this.localPath);
     }
 }
