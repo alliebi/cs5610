@@ -14,12 +14,10 @@ export class RegisterComponent implements OnInit {
     ng_username: string;
     ng_password: string;
     ng_verify_password: string;
-    errorFlag: boolean;
     user: User = {_id: '', username: '', password: '', firstName: '', lastName: '', email: ''};
 
 
     constructor(private router: Router, private userService: UserService) {
-        this.errorFlag = false;
     }
 
     register() {
@@ -28,6 +26,7 @@ export class RegisterComponent implements OnInit {
         this.userService.createUser(this.user);
         const loginUser = this.userService.findUserByCredential(this.ng_username, this.ng_password);
         console.log(loginUser);
+        console.log(this.userService);
         this.router.navigate(['/user', loginUser._id]);
     }
 

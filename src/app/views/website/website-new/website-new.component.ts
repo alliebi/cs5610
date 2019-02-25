@@ -10,7 +10,8 @@ import {WebsiteService} from '../../../services/website.service.client';
     styleUrls: ['./website-new.component.css', '../../../../css/style.css']
 })
 export class WebsiteNewComponent implements OnInit {
-    userId: string;
+
+    uid: string;
     newWebsite: Website;
     newWebsiteName: string;
     newWebsiteDescription: string;
@@ -23,17 +24,15 @@ export class WebsiteNewComponent implements OnInit {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.userId = params['uid'];
+                    this.uid = params['uid'];
                 }
             );
-        this.websites = this.websiteService.findWebsitesByUser(this.userId);
+        this.websites = this.websiteService.findWebsitesByUser(this.uid);
     }
 
     onSubmit() {
-        this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.userId, description: this.newWebsiteDescription};
-        this.websiteService.createWebsite(this.userId, this.newWebsite);
+        this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
+        this.websiteService.createWebsite(this.uid, this.newWebsite);
         this.router.navigate(['../'], {relativeTo: this.route});
     }
 }
-
-

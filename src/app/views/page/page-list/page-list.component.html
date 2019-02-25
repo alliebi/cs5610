@@ -1,31 +1,30 @@
-
-<nav class="navbar fixed-top cl-blue-navbar">
+<nav class="navbar fixed-top bg-light">
     <div class="row container-fluid">
         <div class="col-4">
             <div class="container-fluid">
-                <a [routerLink]="['/user', uid, 'website']" class="navbar-link cl-text-white cl-icon-padding">
+                <a [routerLink]="['/user', uid, 'website']" class="navbar-link cl-text-black cl-icon-padding">
                     <i class="fas fa-chevron-left fontawsome_icon"></i>
                 </a>
-                <div class="cl-text-white navbar-brand cl-text-bold">
+                <div class="cl-text-black navbar-brand cl-text-bold">
                     Pages
                 </div>
             </div>
         </div>
         <div class="float-right">
-            <a [routerLink]="['/user', uid, 'website', wid, 'page']" class="cl-text-white cl-icon-padding">
+            <a [routerLink]="['/user', uid, 'website', wid, 'page', 'new']" class="cl-text-black cl-icon-padding">
                 <i class="fas fa-plus fontawsome_icon"></i>
             </a>
         </div>
     </div>
 </nav>
 <div class=" container-fluid cl-container-padding">
-    <div >
+    <div>
         <ul>
             <li *ngFor="let page of pages">
-                <a [routerLink]="['./', page._id, 'widget']">
+                <a [routerLink]="['/user', uid, 'website', wid, 'page', page._id, 'widget']">
                     page: {{page.title}}
                 </a>
-                <a [routerLink]="['./', page._id]">
+                <a [routerLink]="['/user', uid, 'website', wid, 'page', page._id]">
                     <i class="fas fa-cog fontawsome_icon float-right"></i>
                 </a>
             </li>
@@ -35,7 +34,7 @@
 </div>
 <nav class="navbar fixed-bottom bg-light">
     <div class="container-fuild col-12">
-        <a routerLink="/profile" class="navbar-link navbar-text float-right cl-icon-padding">
+        <a [routerLink]="['/user', uid]" class="navbar-link navbar-text float-right cl-icon-padding">
             <i class="fas fa-user fontawsome_icon"></i>
         </a>
     </div>

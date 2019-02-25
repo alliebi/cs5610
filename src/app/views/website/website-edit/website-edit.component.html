@@ -1,82 +1,78 @@
 <nav class="navbar fixed-top cl-blue-navbar">
-  <div class="row container-fluid ">
-    <div class="col-4 d-none d-md-block">
-      <div class="container-fluid">
-        <a routerLink="user/:uid" class="navbar-link cl-text-white cl-icon-padding">
-          <i class="fas fa-chevron-left fontawsome_icon"></i>
-        </a>
-        <a class="cl-text-white navbar-brand cl-text-bold" href="#">
-          Websites
-        </a>
-        <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white float-right">
-          <i class="fas fa-plus fontawsome_icon"></i>
-        </a>
-      </div>
+    <div class="row container-fluid ">
+        <div class="col-4 d-none d-md-block">
+            <div class="container-fluid">
+                <a [routerLink]="['/user', uid]" class="navbar-link cl-text-white cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                </a>
+                <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+                    Websites
+                </a>
+                <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white float-right">
+                    <i class="fas fa-plus fontawsome_icon"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-8 float-right">
+            <div class="container">
+                <a class="cl-text-white navbar-brand cl-text-bold float-left" href="#">
+                    Edit Website
+                </a>
+                <a [routerLink]="['/user', uid, 'website']" (click)="onUpdateWebsite()"
+                   class="navbar-link cl-text-white float-right">
+                    <i class="fas fa-check fontawsome_icon"></i>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="col-8 float-right">
-      <div class="container">
-        <a class="cl-text-white navbar-brand cl-text-bold float-left" href="#">
-          Edit Website
-        </a>
-        <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white float-right">
-          <i class="fas fa-check fontawsome_icon"></i>
-        </a>
-      </div>
-    </div>
-  </div>
 </nav>
 
 <div class="container-fluid cl-container-padding">
-  <div class="row">
-    <div class="col-sm-4 d-none d-sm-block">
-      <div class="form-control" *ngFor="let website of websites">
-        <a [routerLink]="['../', website._id, 'page']" class="text-blue">{{ website.name }}</a>
-        <a [routerLink]="['../', website._id]" (click)="onChangeWebsite(website._id)" class="text-blue float-right">
-          <i class="fas fa-cog"></i>
-        </a>
-      </div>
-    </div>
-    <div class="col-sm-7">
-      <!--<form #f="ngForm" (ngSubmit)="onEditSubmit()">-->
-      <form>
-        <div class="form-group">
-          <label for="websiteName">Website Name</label>
-          <input
-                  type="text"
-                  name="websiteName"
-                  class="form-control"
-                  id="websiteName"
-                  placeholder="{{ website.name }}"
-                  [(ngModel)]="newWebsiteName">
+    <div class="row">
+        <div class="col-sm-4 d-none d-sm-block">
+            <div class="form-control" *ngFor="let website of websites">
+                <a [routerLink]="['../', website._id, 'page']" class="text-blue">{{ website.name }}</a>
+                <a [routerLink]="['../', website._id]" (click)="onEditWebsite(website._id)"
+                   class="text-blue float-right">
+                    <i class="fas fa-cog"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <!--<form #f="ngForm" (ngSubmit)="onEditSubmit()">-->
+            <form>
+                <div class="form-group">
+                    <label for="websiteName">Website Name</label>
+                    <input
+                            type="text"
+                            name="websiteName"
+                            class="form-control"
+                            id="websiteName"
+                            placeholder="Website Name"
+                            [(ngModel)]="website.name">
 
+                </div>
+                <div class="form-group">
+                    <label for="websiteDescription">Website Description</label>
+                    <textarea
+                            id="websiteDescription"
+                            name="websiteDescription"
+                            class="form-control"
+                            rows="5"
+                            [(ngModel)]="website.description"
+                            placeholder="Website Description">{{ website.description }}</textarea>
+                </div>
+                <button class="btn btn-danger btn-block" type="button" (click)="onDelete()">Delete</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="websiteDescription">Website Description</label>
-          <textarea
-                  id="websiteDescription"
-                  name="websiteDescription"
-                  class="form-control"
-                  rows="5"
-                  [(ngModel)]="newWebsiteDescription"
-                  placeholder="{{ website.description }}"></textarea>
-        </div>
-        <!--<button-->
-        <!--class="btn btn-primary btn-block"-->
-        <!--type="submit">-->
-        <!--[disabled]="!f.valid">-->
-        <!--Submit-->
-        <!--</button>-->
-        <button class="btn btn-danger btn-block" type="button" (click)="onDelete()">Delete</button>
-      </form>
     </div>
-  </div>
 </div>
 
 <nav class="navbar fixed-bottom cl-blue-navbar">
-  <div class="container-fuild col-12">
-    <a routerLink="user/:​uid" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
-      <i class="fas fa-user fontawsome_icon"></i>
-    </a>
-  </div>
+    <div class="container-fuild col-12">
+        <a [routerLink]="['user', uid]" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
 </nav>
 

@@ -1,11 +1,7 @@
 <div class="container">
     <h1>Register</h1>
     <form (ngSubmit)="register()" #f="ngForm">
-         <span
-                 class="help-block"
-                 *ngIf="!username.valid && username.touched">
-        Please enter a valid username
-      </span>
+
         <div class="form-group">
             <input type="text"
                    name="username"
@@ -16,8 +12,8 @@
         </div>
         <span
                 class="help-block"
-                *ngIf="!password.valid && password.touched">
-        Please enter a valid password
+                *ngIf="!username.valid && username.touched">
+        Please enter a valid username
       </span>
         <div class="form-group">
             <input type="text"
@@ -29,9 +25,10 @@
         </div>
         <span
                 class="help-block"
-                *ngIf="(password !== verify_password || !password.valid) && verify_password.touched">
-        Please enter the same password
+                *ngIf="!password.valid && password.touched">
+        Please enter a valid password
       </span>
+
         <div class="form-group">
             <input type="text"
                    name="verify_password"
@@ -40,7 +37,11 @@
                    [(ngModel)]="ng_verify_password" required
                    #verify_password="ngModel"/>
         </div>
-
+        <span
+                class="help-block"
+                *ngIf="(ng_password !== ng_verify_password) && verify_password.touched">
+        Please enter the same password
+      </span>
         <div class="form-group">
             <button class="btn btn-primary btn-block"
                     type="submit"

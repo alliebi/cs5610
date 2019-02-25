@@ -18,43 +18,23 @@
     </div>
 </nav>
 
-<div class="container-fluid cl-container-padding">
-    <ul>
-        <li *ngFor="let website of websites">
-            <a [routerLink]="['/user', uid, 'website', website._id, 'page']" >{{website.name}}<i class="fas fa-cog fontawsome_icon float-right"></i></a>
-        </li>
+<div class="row container-fluid">
+    <div  class="col-12">
+        <ul class="list-group cl-list-group-borderless">
+            <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
+                <a [routerLink]="['/user', uid, 'website', website._id, 'page']">{{website.name}}</a>
+                <a [routerLink]="['/user', uid, 'website', website._id]">
+                    <i class="fas fa-cog fontawsome_icon float-right"></i></a>
+            </li>
 
-    </ul>
+        </ul>
+    </div>
 </div>
-
-
-<!--<div class="row container-fluid">-->
-<!--<div class="col-12">-->
-<!--<ul class="list-group cl-list-group-borderless">-->
-<!--<li class="list-group-item cl-list-item-borderless">-->
-<!--<a [routerLink]="['user/', uid, '/website/new', wid]">Address Book App</a>-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid"> <i class="fas fa-cog fontawsome_icon float-right"></i></a>-->
-<!--</li>-->
-<!--<li class="list-group-item cl-list-item-borderless">-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid/page">Blogger</a>-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid"> <i class="fas fa-cog fontawsome_icon float-right"></i></a>-->
-<!--</li>-->
-<!--<li class="list-group-item cl-list-item-borderless">-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid/page">Blogging App</a>-->
-<!--<a routerLink="user/{{​​uid}}/website/:wid"><i class="fas fa-cog fontawsome_icon float-right"></i></a>-->
-<!--</li>-->
-<!--<li class="list-group-item cl-list-item-borderless">-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid/page">Script Testing App</a>-->
-<!--<a routerLink="user/{{​​​​​uid}}/website/:wid"> <i class="fas fa-cog fontawsome_icon float-right"></i></a>-->
-<!--</li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</div>-->
 
 <nav class="navbar fixed-bottom cl-blue-navbar">
-<div class="container-fuild col-12">
-<a [routerLink]="['/user', uid]" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
-<i class="fas fa-user fontawsome_icon"></i>
-</a>
-</div>
+    <div class="container-fuild col-12">
+        <a [routerLink]="['/user', uid]" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
 </nav>

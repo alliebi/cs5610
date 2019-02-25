@@ -3,7 +3,7 @@
   <div class="row container-fluid">
     <div class="col-4">
       <div class="container-fluid">
-        <a href="widget-list.html" class="navbar-link cl-text-black cl-icon-padding">
+        <a [routerLink]="['../', 'new']" class="navbar-link cl-text-black cl-icon-padding">
           <i class="fas fa-chevron-left fontawsome_icon"></i>
         </a>
         <a class="navbar-brand cl-text-bold cl-text-black" href="#">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="float-right">
-      <a href="widget-list.html" class="cl-text-black cl-icon-padding">
+      <a (click)="onUpdateWidget()" class="cl-text-black cl-icon-padding">
         <i class="fas fa-check fontawsome_icon"></i>
       </a>
     </div>
@@ -27,7 +27,7 @@
               type="text"
               class="form-control"
               name="widgetName"
-              placeholder="{{ widget.name }}"
+              placeholder="Widget Name"
               [(ngModel)]="newWidgetName">
     </div>
     <div class="form-group">
@@ -36,7 +36,7 @@
               type="text"
               class="form-control"
               name="widgetText"
-              placeholder="{{ widget.text }}"
+              placeholder="Widget Text"
               [(ngModel)]="newWidgetText">
     </div>
     <div class="form-group">
@@ -45,7 +45,7 @@
               type="number"
               class="form-control"
               name="widgetSize"
-              placeholder="{{ widget.size }}"
+              placeholder="Widget Size"
               [(ngModel)]="newWidgetSize">
     </div>
     <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
@@ -54,7 +54,7 @@
 
 <nav class="navbar fixed-bottom bg-light">
   <div class="container-fuild col-12">
-    <a href="profile.html" class="navbar-link navbar-text float-right cl-icon-padding">
+    <a [routerLink]="['user', uid]" class="navbar-link navbar-text float-right cl-icon-padding">
       <i class="fas fa-user fontawsome_icon"></i>
     </a>
   </div>

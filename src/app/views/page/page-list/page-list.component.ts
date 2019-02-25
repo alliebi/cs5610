@@ -11,12 +11,12 @@ import {Page} from '../../../models/page.model.client';
 })
 
 export class PageListComponent implements OnInit {
+    // page: Page;
     pages: Page[] = [];
-    pageService: PageService;
     wid: string;
     uid: string;
 
-    constructor(private activateRoute: ActivatedRoute) {
+    constructor(private activateRoute: ActivatedRoute, private pageService: PageService) {
     }
 
     ngOnInit() {
@@ -30,10 +30,8 @@ export class PageListComponent implements OnInit {
                 this.wid = params.wid;
             });
 
-        this.pageService = new PageService();
         this.pages = this.pageService.findPageBywid(this.wid);
-        console.log('page list:');
-        console.log(this.uid);
+        console.log('page list:' + this.pages);
     }
 
 }

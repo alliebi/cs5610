@@ -10,11 +10,10 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class WidgetEditComponent implements OnInit {
     wgid: string;
-    widgetService: WidgetService;
     widget: Widget;
     widgets: Widget[] = [];
 
-    constructor(private activateRoute: ActivatedRoute) {
+    constructor(private activateRoute: ActivatedRoute, private widgetService: WidgetService) {
     }
 
     ngOnInit() {
@@ -23,9 +22,8 @@ export class WidgetEditComponent implements OnInit {
                 console.log('widget edit params:" ');
                 console.log(params);
                 this.wgid = params['wgid'];
-                this.widgetService = new WidgetService();
                 this.widget = this.widgetService.findWidgetById(this.wgid);
-                console.log(this.widgets);
+                console.log(this.widget);
             });
     }
 

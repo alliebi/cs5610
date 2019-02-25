@@ -8,22 +8,20 @@ export class WidgetService {
 
     widgetsChanged = new Subject<Widget[]>();
     private widgetChosen = new BehaviorSubject('DEFAULT');
-    currentWidgetType = this.widgetChosen.asObservable();
     widgets: Widget[] = [
-        new WidgetHeading('123', 'HEADING', '321', 2, 'GIZMODO'),
-        new WidgetHeading('234', 'HEADING', '432', 4, 'Lorem ipsum'),
-        new WidgetImage('345', 'IMAGE', '543', '100%', 'http://lorempixel.com/400/200'),
-        new WidgetImage('456', 'IMAGE', '654', '100%', 'http://lorempixel.com/400/200'),
-        new WidgetHeading('567', 'HEADING', '765', 4, 'Lorem ipsum'),
-        new WidgetYoutube('678', 'YOUTUBE', '876', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM'),
-        new WidgetYoutube('789', 'YOUTUBE', '987', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM')
+        new WidgetHeading('', '123', 'HEADING', '321', 2, 'GIZMODO'),
+        new WidgetHeading('', '234', 'HEADING', '432', 4, 'Lorem ipsum'),
+        new WidgetImage('', '345', 'IMAGE', '543', '100%', 'http://lorempixel.com/400/200'),
+        new WidgetImage('', '456', 'IMAGE', '654', '100%', 'http://lorempixel.com/400/200'),
+        new WidgetHeading('', '567', 'HEADING', '765', 4, 'Lorem ipsum'),
+        new WidgetYoutube('', '678', 'YOUTUBE', '876', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM'),
+        new WidgetYoutube('', '789', 'YOUTUBE', '987', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM')
     ];
 
     createWidget(pageId: string, widget: Widget) {
         widget._id = String(Math.floor(Math.random() * 1000) + 1);
         widget.pageId = pageId;
         this.widgets.push(widget);
-        this.widgetsChanged.next(this.widgets.slice());
     }
 
     findWidgetsByPageId(pageId: string) {
@@ -74,11 +72,6 @@ export class WidgetService {
                 this.widgets.splice(index, 1);
             }
         });
-        this.widgetsChanged.next(this.widgets.slice());
-    }
-
-    chooseNewType(widgetType: string) {
-        this.widgetChosen.next(widgetType);
     }
 }
 

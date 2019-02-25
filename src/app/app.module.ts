@@ -27,7 +27,6 @@ import { WidgetYoutubeComponent } from './views/widget/widget-edit/widget-youtub
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import {SafePipe} from './services/safepipe';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -47,7 +46,7 @@ import {SafePipe} from './services/safepipe';
         WidgetImageComponent,
         WidgetYoutubeComponent,
         WidgetHtmlComponent,
-        SafePipe
+        SafePipe,
     ],
     imports: [
         BrowserModule,

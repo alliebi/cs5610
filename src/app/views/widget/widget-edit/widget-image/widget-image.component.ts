@@ -10,12 +10,11 @@ import {Widget, WidgetImage} from '../../../../models/widget.model.client';
 })
 export class WidgetImageComponent implements OnInit {
     widgetId: string;
-    userId: string;
+    uid: string;
     pageId: string;
-    widget: Widget = new WidgetImage('', '', '', '', '');
-    newWidget: Widget;
+    newWidget: WidgetImage;
+    widget: Widget;
     newWidgetName: string;
-    newWidgetText = '';
     newWidgetWidth = '';
     newWidgetURL = '';
 
@@ -26,7 +25,7 @@ export class WidgetImageComponent implements OnInit {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.userId = params['uid'];
+                    this.uid = params['uid'];
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                 }
@@ -36,28 +35,10 @@ export class WidgetImageComponent implements OnInit {
         }
     }
 
-    onEditWidget() {
-        if (this.widgetId === 'undefined') {
-            this.newWidget = new WidgetImage('', 'IMAGE', this.pageId, this.newWidgetWidth, this.newWidgetURL);
-            this.widgetService.createWidget(this.pageId, this.newWidget);
-            this.router.navigate(['../'], {relativeTo: this.route});
-        } else {
-            if (this.newWidgetText === '') {
-                // @ts-ignore
-                this.newWidgetText = this.widget.text;
-            }
-            if (this.newWidgetWidth === '') {
-                // @ts-ignore
-                this.newWidgetWidth = this.widget.width;
-            }
-            if (this.newWidgetURL === '') {
-                // @ts-ignore
-                this.newWidgetURL = this.widget.url;
-            }
-            this.newWidget = new WidgetImage(this.widgetId, 'IMAGE', this.pageId, this.newWidgetWidth, this.newWidgetURL);
-            this.widgetService.updateWidget(this.widgetId, this.newWidget);
-            this.router.navigate(['../'], {relativeTo: this.route});
-        }
+    onUpdateWidget() {
+        this.newWidget = new WidgetImage(this.newWidgetName, '', 'IMAGE', '', this.newWidgetWidth, this.newWidgetURL);
+        this.widgetService.updateWidget(this.widgetId, this.newWidget);
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
     onDelete() {

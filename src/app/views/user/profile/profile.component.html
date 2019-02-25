@@ -1,75 +1,88 @@
-<div>
-    <nav class="navbar fixed-top cl-blue-navbar">
-        <div class="row container-fluid">
-            <div class="col-6">
-                <a class="navbar-brand cl-text-white" href="#">
-                    Profile
-                </a>
-            </div>
-            <div class="col-6">
-                <a (click)="onUpdateUser()" style="cursor:pointer;"
-                   class="navbar-link cl-text-white float-right cl-icon-padding" href="#">
-                    <i class="fas fa-check fontawsome_icon"></i>
-                </a>
+<nav class="navbar fixed-top cl-blue-navbar">
+    <div class="row container-fluid">
+        <div class="col-6">
+            <div class="navbar-brand cl-text-white">
+                Profile
             </div>
         </div>
-    </nav>
+        <div class="col-6">
+            <a (click)="onUpdateUser()"
+               class="navbar-link float-right cl-icon-padding">
+                <i class="fas fa-check fontawsome_icon cl-text-white"></i>
+            </a>
+        </div>
+    </div>
+</nav>
 
-    <div *ngIf="errorFlag" class="alert alert-danger">
-        {{errorMsg}}
-    </div>
-    <div class="container-fluid cl-container-padding">
-        <form (ngSubmit)="profile()" #f="ngForm">
-            <label>Username</label>
-            <div class="form-group">
-                <input
-                        type="text"
-                        name="username"
-                        placeholder="{{user.username}}"
-                        class="form-group"
-                        [(ngModel)]="newUsername"
-                        required
-                />
-            </div>
-            <label>Email address</label>
-            <div class="form-group">
-                <input type="text"
-                       name="email"
-                       placeholder="{{user.email}}"
-                       class="form-group"
-                       [(ngModel)]="newEmail"
-                       required
-                />
-            </div>
-            <label>First Name</label>
-            <div class="form-group">
-                <input type="text"
-                       name="first-name"
-                       placeholder="{{user.firstName}}"
-                       class="form-group"
-                       [(ngModel)]="newFirstName"
-                       required
-                />
-            </div>
-            <label>Last Name</label>
-            <div class="form-group">
-                <input type="text"
-                       name="last-name"
-                       placeholder="{{user.lastName}}"
-                       class="form-group"
-                       [(ngModel)]="newLastName"
-                       required
-                />
-            </div>
-            <div class="form-group">
-                <a class="btn btn-primary btn-block" [routerLink]="['/user', this.uid, 'website']"
-                >Websites
-                </a>
-            </div>
-            <div>
-                <a class="btn btn-danger  btn-block"
-                   routerLink="/login">Logout</a>
-            </div>
-        </form>
-    </div>
+<div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
 </div>
+<div class="container-main">
+    <form (ngSubmit)="profile()" #f="ngForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    class="form-control"
+                    id="username"
+                    [(ngModel)]="user.username"
+                    required
+                    #username="ngModel"
+            />
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email"
+                   pattern=".+@.+"
+                   name="email"
+                   id="email"
+                   placeholder="Email"
+                   class="form-control"
+                   [(ngModel)]="user.email"
+                   required
+                   #email="ngModel"
+            />
+            <span class="help-block" *ngIf="!email.valid && email.touched">
+                Please enter correct email address!
+                </span>
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text"
+                   name="first-name"
+                   id="first-name"
+                   placeholder="First Name"
+                   class="form-control"
+                   [(ngModel)]="user.firstName"
+                   required
+                   #firstName="ngModel"
+
+            />
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text"
+                   name="last-name"
+                   placeholder="Last Name"
+                   class="form-control"
+                   id="last-name"
+                   [(ngModel)]="user.lastName"
+                   required
+                   #lastName="ngModel"
+
+            />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" [routerLink]="['/user', this.uid, 'website']"
+            >Websites
+            </button>
+        </div>
+        <div>
+            <a class="btn btn-danger  btn-block"
+               routerLink="/login">Logout</a>
+        </div>
+    </form>
+</div>
+

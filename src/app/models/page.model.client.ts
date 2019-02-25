@@ -5,10 +5,10 @@ export class Page {
     wid: string;
     title: string;
 
-    constructor(_id, name, websiteId, description) {
+    constructor(_id, name, wid, title) {
         this._id = _id;
         this.name = name;
-        this.wid = websiteId;
-        this.title = description;
+        this.wid = wid;
+        this.title = title;
     }
 }

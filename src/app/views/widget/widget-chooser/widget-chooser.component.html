@@ -1,38 +1,40 @@
-
 <nav class="navbar fixed-top navbar-light bg-light">
-  <div class="row container-fluid">
-    <div class="col-4">
-      <div class="container-fluid">
-        <a href="widget-list.html" class="navbar-link cl-text-black cl-icon-padding">
-          <i class="fas fa-chevron-left fontawsome_icon"></i>
-        </a>
-        <a class="navbar-brand cl-text-bold cl-text-black" href="#">
-          Choose Widget
-        </a>
-      </div>
+    <div class="row container-fluid">
+        <div class="col-4">
+            <div class="container-fluid">
+                <a href="widget-list.html" class="navbar-link cl-text-black cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                </a>
+                <a class="navbar-brand cl-text-bold cl-text-black" href="#">
+                    Choose Widget
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <div class="container-fluid cl-container-padding">
-  <ul class="list-group">
-    <li class="list-group-item border-0">
-      <a [routerLink]="['../', widget._id]" class="text-blue" (click)="onNewWidget('HEADING')">Header</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('IMAGE')">Image</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['../', widgetId]" class="text-blue" (click)="onNewWidget('YOUTUBE')">YouTube</a>
-    </li>
-  </ul>
+    <ul class="list-group cl-list-group-borderless">
+        <li class="list-group-item cl-list-item-borderless cl-text-blue" >
+            <a [routerLink]="['../', widget._id] " style="cursor:pointer;"
+               (click)="onSubmit('HEADING')">Header</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless cl-text-blue" >
+            <a [routerLink]="['../', widget._id]" style="cursor:pointer;"
+               (click)="onSubmit('IMAGE')">Image</a>
+        </li>
+        <li class="list-group-item cl-list-item-borderless cl-text-blue">
+            <a [routerLink]="['../', widget._id]" style="cursor:pointer;"
+               (click)="onSubmit('YOUTUBE')">YouTube</a>
+        </li>
+    </ul>
 </div>
 
 <nav class="navbar fixed-bottom bg-light">
-  <div class="container-fuild col-12">
-    <a href="profile.html" class="navbar-link navbar-text float-right cl-icon-padding">
-      <i class="fas fa-user fontawsome_icon"></i>
-    </a>
-  </div>
+    <div class="container-fuild col-12">
+        <a href="profile.html" class="navbar-link navbar-text float-right cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
 </nav>
 

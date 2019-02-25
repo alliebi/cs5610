@@ -10,14 +10,14 @@ import {WidgetService} from '../../../../services/widget.service.client';
 })
 export class WidgetYoutubeComponent implements OnInit {
     widgetId: string;
-    userId: string;
+    uid: string;
     pageId: string;
-    widget: Widget = new WidgetYoutube('', '', '', '', '');
-    newWidget: Widget;
+    newWidget: WidgetYoutube;
+    widget: Widget;
     newWidgetName: string;
-    newWidgetText: string = '';
-    newWidgetWidth: string = '';
-    newWidgetURL: string = '';
+    newWidgetText = '';
+    newWidgetWidth = '';
+    newWidgetURL = '';
 
     constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
     }
@@ -26,7 +26,7 @@ export class WidgetYoutubeComponent implements OnInit {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.userId = params['uid'];
+                    this.uid = params['uid'];
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                 }
@@ -36,34 +36,14 @@ export class WidgetYoutubeComponent implements OnInit {
         }
     }
 
-
-    onEditWidget() {
-        if (this.widgetId === 'undefined') {
-            this.newWidget = new WidgetYoutube('', 'YOUTUBE', this.pageId, this.newWidgetWidth, this.newWidgetURL);
-            this.widgetService.createWidget(this.pageId, this.newWidget);
-            this.router.navigate(['../'], {relativeTo: this.route});
-        } else {
-            if (this.newWidgetText === '') {
-                // @ts-ignore
-                this.newWidgetText = this.widget.text;
-            }
-            if (this.newWidgetWidth === '') {
-                // @ts-ignore
-                this.newWidgetWidth = this.widget.width;
-            }
-            if (this.newWidgetURL === '') {
-                // @ts-ignore
-                this.newWidgetURL = this.widget.url;
-            }
-            this.newWidget = new WidgetYoutube(this.widgetId, 'YOUTUBE', this.pageId, this.newWidgetWidth, this.newWidgetURL);
-            this.widgetService.updateWidget(this.widgetId, this.newWidget);
-            this.router.navigate(['../'], {relativeTo: this.route});
-        }
+    onUpdateWidget() {
+        this.newWidget = new WidgetYoutube(this.newWidgetName, '', 'YOUTUBE', this.pageId, this.newWidgetWidth, this.newWidgetURL)
+        this.widgetService.updateWidget(this.widgetId, this.newWidget);
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
     onDelete() {
         this.widgetService.deleteWidget(this.widgetId);
         this.router.navigate(['../'], {relativeTo: this.route});
     }
-
 }

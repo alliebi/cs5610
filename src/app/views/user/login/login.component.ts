@@ -5,7 +5,6 @@ import {ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
 
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -14,38 +13,28 @@ import {User} from '../../../models/user.model.client';
 export class LoginComponent implements OnInit {
 
     @ViewChild('f') loginForm: NgForm;
-
     username: string; // see usage as two-way data binding
     password: string; // see usage as two-way data binding
-    userService: UserService;
-    user: User;
     uid: string;
-
     errorFlag: boolean;
     errorMsg = 'Invalid username or password !';
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private userService: UserService) {
         this.errorFlag = false;
-        this.userService = new UserService();
     }
 
     login() {
         this.username = this.loginForm.value.username;
         this.password = this.loginForm.value.password;
-        this.user = this.userService.findUserByCredential(this.username, this.password);
-        this.uid = this.user._id;
-        console.log(this.username);
-        console.log(this.uid);
-
-        if (this.password !== 'alice') {
-            this.errorFlag = true;
+        const loginUser = this.userService.findUserByCredential(this.username, this.password);
+        console.log(loginUser);
+        if (loginUser === undefined || this.password !== loginUser.password) {
+            this.errorFlag = false;
         } else {
-            this.router.navigate(['/user', this.uid]);
+            this.router.navigate(['/user', loginUser._id]);
         }
     }
 
     ngOnInit() {
-
     }
-
 }

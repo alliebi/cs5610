@@ -3,24 +3,21 @@
         <div class="container-fluid ">
 
             <div class="col-1 ">
-                <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white cl-icon-padding">
-                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                <a [routerLink]="['../']" class="navbar-link  cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon cl-text-white"></i>
                 </a>
             </div>
             <div class="col-3 d-none d-md-block">
                 <a class="cl-text-white navbar-brand cl-text-bold" href="#">
                     Websites
                 </a>
-                <a routerLink="user/:​​​uid/website/new" class="navbar-link cl-text-white float-right">
-                    <i class="fas fa-plus fontawsome_icon"></i>
-                </a>
             </div>
             <div class="col-8">
                 <a class="cl-text-white navbar-brand cl-text-bold float-left" href="#">
                     New Websites
                 </a>
-                <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white float-right">
-                    <i class="fas fa-check fontawsome_icon"></i>
+                <a [routerLink]="['../']" (click)="onSubmit()" class="navbar-link float-right">
+                    <i class="fas fa-check fontawsome_icon cl-text-white"></i>
                 </a>
             </div>
 
@@ -78,8 +75,8 @@
 
     <nav class="navbar fixed-bottom cl-blue-navbar">
         <div class="container-fuild col-12">
-            <a routerLink="user/:​uid" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
-                <i class="fas fa-user fontawsome_icon"></i>
+            <a [routerLink]="['user', uid]" class="navbar-link navbar-text float-right cl-icon-padding">
+                <i class="fas fa-user fontawsome_icon cl-text-white"></i>
             </a>
         </div>
     </nav>

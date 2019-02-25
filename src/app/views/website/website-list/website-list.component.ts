@@ -11,21 +11,14 @@ import {WebsiteService} from '../../../services/website.service.client';
 export class WebsiteListComponent implements OnInit {
   uid: string;
   websites: Website[] = [];
-  websiteService: WebsiteService;
-  wid: string;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(
-        (params: any) => {
-          console.log('"params:" ');
-          console.log(params);
-          this.uid = params['uid'];
-          console.log(this.uid);
-        });
-    this.websiteService = new WebsiteService();
+      this.activatedRoute.params.subscribe(
+          (params: any) => {
+              this.uid = params['uid'];
+          });
     this.websites = this.websiteService.findWebsitesByUser(this.uid);
-    console.log(this.websites);
   }
 }
