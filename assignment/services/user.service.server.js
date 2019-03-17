@@ -20,7 +20,7 @@ module.exports = function (app) {
                 return;
             }
 
-            user._id = Math.random().toString();
+            user._id = Math.round(Math.random() * 1000).toString();
             USERS.push(user);
             res.json(user);
         }

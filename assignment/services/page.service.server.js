@@ -20,7 +20,7 @@ module.exports = function (app) {
                 return;
             }
         }
-        page._id = Math.random().toString();
+        page._id = Math.round(Math.random() * 1000).toString();
         page.websiteId = websiteId;
         pages.push(page);
         res.json(page);

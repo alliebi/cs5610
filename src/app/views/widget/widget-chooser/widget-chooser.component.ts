@@ -9,7 +9,10 @@ import {Widget} from '../../../models/widget.model.client';
     styleUrls: ['./widget-chooser.component.css', '../../../../css/style.css']
 })
 export class WidgetChooserComponent implements OnInit {
+    uid: string;
+    wid: string;
     pid: string;
+    wgid: string;
     widget: Widget;
 
     constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
@@ -19,23 +22,35 @@ export class WidgetChooserComponent implements OnInit {
         this.activatedRoute.params
             .subscribe(
                 (params: Params) => {
+                    this.uid = params.uid;
+                    this.wid = params.wid;
                     this.pid = params.pid;
+                    this.wgid = params.wgid;
+                    this.widget = {name: '', _id: '', widgetType: '', pageId: this.pid};
                 }
             );
-        this.widget = {name: '', _id: '', widgetType: '', pageId: this.pid};
-        this.widgetService.createWidget(this.pid, this.widget).subscribe(
-            (data: any) => {
-                this.widget = data;
-            }
-        );
-        console.log('pid: ' + this.pid);
-        console.log('on init widget: ' + this.widget._id);
-
     }
 
     onSubmit(newWidgetType: string) {
+        console.log(newWidgetType);
+
         this.widget.widgetType = newWidgetType;
-        console.log('onSubmit widget: ' + this.widget);
+        this.widgetService.createWidget(this.pid, this.widget).subscribe(
+            (data: any) => {
+                this.widget = data;
+                this.router.navigate(['user/', this.uid, 'website', this.wid, 'page', this.pid, 'widget', data._id]);
+            }
+        );
+        // switch (this.widget.widgetType) {
+        //     case 'HEADING':
+        //         // code block
+        //         break;
+        //     case 'IMAGE':
+        //         // code block
+        //         break;
+        //     default:
+        //     // code block
+        // }
     }
 
 }

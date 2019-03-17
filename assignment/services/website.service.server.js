@@ -23,7 +23,7 @@ module.exports = function (app) {
                 return;
             }
         }
-        website._id = Math.random().toString();
+        website._id = Math.round(Math.random() * 1000).toString();
         website.developerId = userId;
         WEBSITES.push(website);
         res.json(website);

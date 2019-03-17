@@ -1,8 +1,6 @@
 import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/operators';
-
 
 @Injectable()
 export class WidgetService {
@@ -10,15 +8,6 @@ export class WidgetService {
     }
 
     base_url = 'http://localhost:3200/';
-    // widgets: Widget[] = [
-    //     new WidgetHeading('', '123', 'HEADING', '321', 2, 'GIZMODO'),
-    //     new WidgetHeading('', '234', 'HEADING', '432', 4, 'Lorem ipsum'),
-    //     new WidgetImage('', '345', 'IMAGE', '543', '100%', 'http://lorempixel.com/400/200'),
-    //     new WidgetImage('', '456', 'IMAGE', '654', '100%', 'http://lorempixel.com/400/200'),
-    //     new WidgetHeading('', '567', 'HEADING', '765', 4, 'Lorem ipsum'),
-    //     new WidgetYoutube('', '678', 'YOUTUBE', '876', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM'),
-    //     new WidgetYoutube('', '789', 'YOUTUBE', '987', '100%', 'https://www.youtube.com/embed/-C_jPcUkVrM')
-    // ];
 
     createWidget(pageId: string, widget: Widget) {
         const url = this.base_url + 'api/page/' + pageId + '/widget';

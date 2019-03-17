@@ -16,19 +16,31 @@
 <div class="container-fluid cl-container-padding">
     <ul class="list-group cl-list-group-borderless">
         <li class="list-group-item cl-list-item-borderless cl-text-blue" >
-            <a [routerLink]="['../', widget._id] " style="cursor:pointer;"
+            <a  style="cursor:pointer;"
                (click)="onSubmit('HEADING')">Header</a>
         </li>
         <li class="list-group-item cl-list-item-borderless cl-text-blue" >
-            <a [routerLink]="['../', widget._id]" style="cursor:pointer;"
+            <a  style="cursor:pointer;"
                (click)="onSubmit('IMAGE')">Image</a>
         </li>
         <li class="list-group-item cl-list-item-borderless cl-text-blue">
-            <a [routerLink]="['../', widget._id]" style="cursor:pointer;"
+            <a  style="cursor:pointer;"
                (click)="onSubmit('YOUTUBE')">YouTube</a>
         </li>
     </ul>
 </div>
+
+<!--<div *ngIf="widget !== undefined" [ngSwitch]="widget.widgetType">-->
+    <!--<div *ngSwitchCase="'HEADING'">-->
+        <!--<app-widget-heading></app-widget-heading>-->
+    <!--</div>-->
+    <!--<div *ngSwitchCase="'IMAGE'">-->
+        <!--<app-widget-image></app-widget-image>-->
+    <!--</div>-->
+    <!--<div *ngSwitchCase="'YOUTUBE'">-->
+        <!--<app-widget-youtube></app-widget-youtube>-->
+    <!--</div>-->
+<!--</div>-->
 
 <nav class="navbar fixed-bottom bg-light">
     <div class="container-fuild col-12">

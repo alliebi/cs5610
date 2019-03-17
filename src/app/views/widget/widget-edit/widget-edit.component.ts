@@ -14,7 +14,6 @@ export class WidgetEditComponent implements OnInit {
     pid: string;
     wgid: string;
     widget: Widget;
-    widgets: Widget[] = [];
 
     constructor(private activateRoute: ActivatedRoute, private widgetService: WidgetService) {
     }
@@ -30,7 +29,6 @@ export class WidgetEditComponent implements OnInit {
 
         this.widgetService.findWidgetById(this.wgid).subscribe(
             (data: any) => {
-                console.log(data);
                 this.widget = data;
             }
         );

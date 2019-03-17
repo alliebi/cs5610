@@ -45,7 +45,6 @@
                 <!--<a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', widget._id]" class="float-right text-blue">-->
                 <!--<i class="fas fa-cog"></i>-->
                 <!--</a>-->
-                <h3 *ngSwitchCase="'HEADING'">{{ widget.text }}</h3>
                 <img *ngSwitchCase="'IMAGE'" [src]="widget.url">
                 <iframe *ngSwitchCase="'YOUTUBE'" width="640" height="360" [src]="widget.url|safe" rameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
