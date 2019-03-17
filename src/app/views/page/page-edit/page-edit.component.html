@@ -13,11 +13,12 @@
             </div>
         </div>
         <div class="float-right">
-            <a [routerLink]="['/user', uid, 'website', wid, 'page']" (click)="onUpdate()" class="cl-text-white navbar-link cl-icon-padding">
+            <a  (click)="onUpdate() "  [routerLink]="['/user', uid, 'website', wid, 'page']" class="cl-text-white navbar-link cl-icon-padding">
                 <i class="fas fa-check fontawsome_icon"></i>
             </a>
         </div>
     </div>
+
 </nav>
 <div class="container">
     <form>

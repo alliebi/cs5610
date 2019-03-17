@@ -29,8 +29,10 @@ module.exports = function (app) {
 
     function findAllPagesForWebsite(req, res) {
         var websiteId = req.params.websiteId;
+        console.log('wid:' + websiteId);
         var pages = getPagesForWebsiteId(websiteId);
-        console.log("server Pages:" + pages);
+        console.log("server Pages:" );
+        console.log(pages);
         res.json(pages);
     }
 
@@ -47,14 +49,18 @@ module.exports = function (app) {
 
     function findPageById(req, res) {
         var pageId = req.params.pageId;
-        var page = PAGES.filter(function (page) {
-            return page._id === pageId;
-        });
+        var page = getPageForId(pageId);
         res.json(page);
     }
 
+    function getPageForId(pageId) {
+        return PAGES.find(function (page) {
+            return page._id === pageId;
+        });
+    }
+
     function updatePage(req, res) {
-        var pageI = req.paras.pageId;
+        var pageId = req.params.pageId;
         var page = req.body;
         for (var i = 0; i < PAGES.length; i++) {
             if (PAGES[i]._id === pageId) {
@@ -62,7 +68,7 @@ module.exports = function (app) {
                 PAGES[i].title = page.title;
             }
         }
-        res.json(findPageById(pageId));
+        res.json(getPageForId(pageId));
     }
 
     function deletePage(req, res) {

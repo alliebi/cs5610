@@ -11,10 +11,9 @@ import {Page} from '../../../models/page.model.client';
 })
 
 export class PageListComponent implements OnInit {
-    // page: Page;
     pages: Page[] = [];
-    wid: string;
     uid: string;
+    wid: string;
 
     constructor(private activateRoute: ActivatedRoute, private pageService: PageService) {
     }
@@ -22,21 +21,21 @@ export class PageListComponent implements OnInit {
     ngOnInit() {
         this.activateRoute.params.subscribe(
             (params: any) => {
-                console.log('page list params:" ');
-                console.log(params);
-                console.log(params['wid']);
-                console.log(params['uid']);
-                this.uid = params.uid;
-                this.wid = params.wid;
+                this.uid = params['uid'];
+                this.wid = params['wid'];
+                console.log('page-list uid:');
+                console.log(this.uid);
+                console.log('page-list wid:');
+                console.log(this.wid);
             });
 
         this.pageService.findPageBywid(this.wid).subscribe(
             (data: any) => {
                 this.pages = data;
-                console.log('pages: ' + data);
             }
         );
-        console.log('page list:' + this.pages);
+        console.log('page list:' );
+        console.log(this.pages);
     }
 
 }

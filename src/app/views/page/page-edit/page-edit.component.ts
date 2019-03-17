@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../../../models/page.model.client';
 import {PageService} from '../../../services/page.service.client';
 
@@ -14,7 +14,7 @@ export class PageEditComponent implements OnInit {
     pid: string;
     page: Page;
 
-    constructor(private activateRoute: ActivatedRoute, private pageService: PageService) {
+    constructor(private activateRoute: ActivatedRoute, private pageService: PageService, private router: Router) {
     }
 
     ngOnInit() {
@@ -29,17 +29,19 @@ export class PageEditComponent implements OnInit {
                 this.page = data;
             }
         );
-        console.log(this.uid);
-        console.log(this.pid);
-        console.log(this.page.name);
+        console.log('page edit:');
+        console.log(this.page);
     }
 
     onUpdate() {
         this.pageService.updatePage(this.pid, this.page).subscribe(
             (data: any) => {
                 this.page = data;
+                this.router.navigate(['/user', this.uid, 'website', this.wid, 'page']);
+
             }
         );
+
         console.log(this.page);
     }
 }
