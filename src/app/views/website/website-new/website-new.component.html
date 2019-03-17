@@ -1,7 +1,6 @@
 <div>
     <nav class="navbar fixed-top cl-blue-navbar">
         <div class="container-fluid ">
-
             <div class="col-1 ">
                 <a [routerLink]="['../']" class="navbar-link  cl-icon-padding">
                     <i class="fas fa-chevron-left fontawsome_icon cl-text-white"></i>
@@ -21,6 +20,17 @@
                 </a>
             </div>
 
+        </div>
+    </nav>
+
+    <nav class="navbar fixed-top cl-blue-navbar">
+        <div class="container-fluid ">
+            <a [routerLink]="['/user', uid]" class="navbar-brand float-left">
+                <span id="left-chev" class="fas fa-chevron-left cl-text-white"> Website</span>
+            </a>
+            <a [routerLink]="['/user', uid, 'website', 'new']" class="navbar-brand cl-text-white cl-icon-padding pull-right">
+                <span id="icon-plus" class="fas fa-plus fontawsome_icon"></span>
+            </a>
         </div>
     </nav>
 

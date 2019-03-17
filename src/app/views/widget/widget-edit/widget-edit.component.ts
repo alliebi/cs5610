@@ -9,6 +9,9 @@ import {ActivatedRoute} from '@angular/router';
     styleUrls: ['./widget-edit.component.css', '../../../../css/style.css']
 })
 export class WidgetEditComponent implements OnInit {
+    uid: string;
+    wid: string;
+    pid: string;
     wgid: string;
     widget: Widget;
     widgets: Widget[] = [];
@@ -19,12 +22,18 @@ export class WidgetEditComponent implements OnInit {
     ngOnInit() {
         this.activateRoute.params.subscribe(
             (params: any) => {
-                console.log('widget edit params:" ');
-                console.log(params);
+                this.uid = params['uid'];
+                this.wid = params['wid'];
+                this.pid = params['pid'];
                 this.wgid = params['wgid'];
-                this.widget = this.widgetService.findWidgetById(this.wgid);
-                console.log(this.widget);
             });
+
+        this.widgetService.findWidgetById(this.wgid).subscribe(
+            (data: any) => {
+                console.log(data);
+                this.widget = data;
+            }
+        );
     }
 
 }

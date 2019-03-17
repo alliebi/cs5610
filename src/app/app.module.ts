@@ -26,6 +26,8 @@ import { WidgetImageComponent } from './views/widget/widget-edit/widget-image/wi
 import { WidgetYoutubeComponent } from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import {SafePipe} from './services/safepipe';
+import { HttpClientModule } from '@angular/common/http';
+import { SortableDirective } from './directives/sortable.directive';
 
 @NgModule({
     declarations: [
@@ -47,11 +49,13 @@ import {SafePipe} from './services/safepipe';
         WidgetYoutubeComponent,
         WidgetHtmlComponent,
         SafePipe,
+        SortableDirective,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        HttpClientModule,
     ],
     providers: [UserService, WebsiteService, PageService, WidgetService],
     bootstrap: [AppComponent]

@@ -23,7 +23,11 @@ export class WidgetChooserComponent implements OnInit {
                 }
             );
         this.widget = {name: '', _id: '', widgetType: '', pageId: this.pid};
-        this.widgetService.createWidget(this.pid, this.widget);
+        this.widgetService.createWidget(this.pid, this.widget).subscribe(
+            (data: any) => {
+                this.widget = data;
+            }
+        );
         console.log('pid: ' + this.pid);
         console.log('on init widget: ' + this.widget._id);
 

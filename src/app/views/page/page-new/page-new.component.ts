@@ -30,7 +30,11 @@ export class PageNewComponent implements OnInit {
 
     onSubmit() {
         this.newPage = {_id: '', name: this.newPageName, wid: this.wid, title: this.newTitle};
-        this.pageService.createPage(this.wid, this.newPage);
+        this.pageService.createPage(this.wid, this.newPage).subscribe(
+            (data: any) => {
+                this.newPage = data;
+            }
+        );
         this.router.navigate(['../'], {relativeTo: this.activateRoute});
     }
 

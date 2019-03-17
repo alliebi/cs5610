@@ -23,11 +23,21 @@ export class RegisterComponent implements OnInit {
     register() {
         this.user.username = this.ng_username;
         this.user.password = this.ng_password;
-        this.userService.createUser(this.user);
-        const loginUser = this.userService.findUserByCredential(this.ng_username, this.ng_password);
-        console.log(loginUser);
-        console.log(this.userService);
-        this.router.navigate(['/user', loginUser._id]);
+        this.userService.createUser(this.user).subscribe(
+            (user: any) => {
+                this.user = user;
+            }
+        );
+        this.userService.findUserByCredentials(this.ng_username, this.ng_password).subscribe(
+            (user: any) => {
+                this.router.navigate(['/user', user._id]);
+            }
+        );
+        // this.userService.createUser(this.user);
+        // const loginUser = this.userService.findUserByCredentials(this.ng_username, this.ng_password);
+        // console.log(loginUser);
+        // console.log(this.userService);
+        // this.router.navigate(['/user', loginUser._id]);
     }
 
     ngOnInit() {

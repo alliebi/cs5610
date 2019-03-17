@@ -10,7 +10,6 @@ import {WebsiteService} from '../../../services/website.service.client';
     styleUrls: ['./website-new.component.css', '../../../../css/style.css']
 })
 export class WebsiteNewComponent implements OnInit {
-
     uid: string;
     newWebsite: Website;
     newWebsiteName: string;
@@ -18,7 +17,8 @@ export class WebsiteNewComponent implements OnInit {
     websites: Website[];
     @ViewChild('f') websiteForm: NgForm;
 
-    constructor(private websiteService: WebsiteService, private route: ActivatedRoute, private router: Router) { }
+    constructor(private websiteService: WebsiteService, private route: ActivatedRoute, private router: Router) {
+    }
 
     ngOnInit() {
         this.route.params
@@ -27,12 +27,20 @@ export class WebsiteNewComponent implements OnInit {
                     this.uid = params['uid'];
                 }
             );
-        this.websites = this.websiteService.findWebsitesByUser(this.uid);
+        this.websiteService.findWebsitesByUser(this.uid).subscribe(
+            (data: any) => {
+                this.websites = data;
+            }
+        );
     }
 
     onSubmit() {
         this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
-        this.websiteService.createWebsite(this.uid, this.newWebsite);
+        this.websiteService.createWebsite(this.uid, this.newWebsite).subscribe(
+            (data: any) => {
+                this.newWebsite = data;
+            }
+        );
         this.router.navigate(['../'], {relativeTo: this.route});
     }
 }

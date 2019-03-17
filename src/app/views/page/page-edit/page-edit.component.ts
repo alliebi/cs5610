@@ -24,14 +24,22 @@ export class PageEditComponent implements OnInit {
                 this.wid = params['wid'];
                 this.pid = params['pid'];
             });
-        this.page = this.pageService.findPageById(this.pid);
+        this.pageService.findPageById(this.pid).subscribe(
+            (data: any) => {
+                this.page = data;
+            }
+        );
         console.log(this.uid);
         console.log(this.pid);
         console.log(this.page.name);
     }
 
     onUpdate() {
-        this.pageService.updatePage(this.pid, this.page);
+        this.pageService.updatePage(this.pid, this.page).subscribe(
+            (data: any) => {
+                this.page = data;
+            }
+        );
         console.log(this.page);
     }
 }

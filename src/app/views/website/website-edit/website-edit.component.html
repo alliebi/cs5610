@@ -8,7 +8,7 @@
                 <a class="cl-text-white navbar-brand cl-text-bold" href="#">
                     Websites
                 </a>
-                <a routerLink="user/:​​​uid/website" class="navbar-link cl-text-white float-right">
+                <a routerLink="/user/{{uid}}/website/new" class="navbar-link cl-text-white float-right">
                     <i class="fas fa-plus fontawsome_icon"></i>
                 </a>
             </div>
@@ -19,8 +19,8 @@
                     Edit Website
                 </a>
                 <a [routerLink]="['/user', uid, 'website']" (click)="onUpdateWebsite()"
-                   class="navbar-link cl-text-white float-right">
-                    <i class="fas fa-check fontawsome_icon"></i>
+                   class="navbar-link cl-text-white ">
+                    <i class="fas fa-check fontawsome_icon float-right"></i>
                 </a>
             </div>
         </div>

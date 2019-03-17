@@ -22,7 +22,7 @@
         <ul>
             <li *ngFor="let page of pages">
                 <a [routerLink]="['/user', uid, 'website', wid, 'page', page._id, 'widget']">
-                    page: {{page.title}}
+                    page: {{page.name}}
                 </a>
                 <a [routerLink]="['/user', uid, 'website', wid, 'page', page._id]">
                     <i class="fas fa-cog fontawsome_icon float-right"></i>

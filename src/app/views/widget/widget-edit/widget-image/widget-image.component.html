@@ -56,25 +56,34 @@
                     placeholder="Widget Width"
                     [(ngModel)]="newWidget.width">
         </div>
-        <div class="form-group">
-            <label>Upload</label>
-            <div class="file-upload">
-                <div class="file-upload">
-                    <input type="file"
-                           id="avatar" name="avatar"
-                           accept="image/png, image/jpeg"
-                           (change)="handleUpload($event)">
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" >Upload Image</button>
-            <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
-        </div>
     </form>
+    <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+
+        <input name="myFile" type="file" class="form-control"/>
+        <input name="widgetId" value="{{widgetId}}" style="display: none"/>
+        <input name="websiteId" value="{{websiteId}}" style="display: none"/>
+        <input name="pageId" value="{{pageId}}" style="display: none"/>
+        <input name="userId" value="{{userId}}" style="display: none"/>
+        <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        <br/>
+
+    </form>
+
+
+    <a class="btn btn-primary btn-block "
+
+       [routerLink]="['/user'+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']">Choose From
+        Flickr</a>
+
+
+    <a class="btn btn-danger  btn-block" (click)="onDelete()">Delete</a>
+
+    <!--</form>-->
 </div>
 
 <nav class="navbar fixed-bottom bg-light">
     <div class="container-fuild col-12">
-        <a [routerLink]="['user', uid]" class="navbar-link navbar-text float-right cl-icon-padding">
+        <a [routerLink]="['user', userId]" class="navbar-link navbar-text float-right cl-icon-padding">
             <i class="fas fa-user fontawsome_icon"></i>
         </a>
     </div>

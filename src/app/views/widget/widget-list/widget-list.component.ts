@@ -22,17 +22,34 @@ export class WidgetListComponent implements OnInit {
     ngOnInit() {
         this.activateRoute.params.subscribe(
             (params: any) => {
-                console.log('widget list params:" ');
-                console.log('params:' + params);
                 this.uid = params['uid'];
                 this.wid = params['wid'];
                 this.pid = params['pid'];
-                console.log('pid:' + this.pid);
-                console.log('wid:' + this.wid);
-                console.log('uid:' + this.uid);
+                console.log('widget-list component ts pid:' + this.pid);
+                console.log('widget-list component ts wid:' + this.wid);
+                console.log('widget-list component ts uid:' + this.uid);
+                console.log('widget-list component ts onInit');
 
-                this.widgets = this.widgetService.findWidgetsByPageId(this.pid);
+                this.widgetService.findWidgetsByPageId(this.pid).subscribe(
+                    (data: any) => {
+                        this.widgets = data;
+                        for (const w of this.widgets) {
+                            console.log('widget-list component ts: widgets');
+                            console.log(w._id);
+
+                        }
+                    }
+                );
             });
+    }
+
+    // receiving the emitted event
+    reorderWidgets(indexes) {
+        // call widget service function to update widget as per index
+        this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pid)
+            .subscribe(
+                (data) => console.log(data)
+            );
     }
 
 }

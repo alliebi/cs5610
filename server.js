@@ -6,11 +6,13 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.json());
+// install, load, and configure body parser module
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, "dist/my-project")));
+
 
 // CORS
 app.use(function(req, res, next) {
@@ -23,7 +25,13 @@ app.use(function(req, res, next) {
 const port = process.env.PORT || '3200';
 app.set('port', port);
 
+require("./assignment/app")(app);
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
+});
 
 // Create HTTP server
 const server = http.createServer(app);
-server.listen( port , () => console.log('Running on port 3200'));
+server.listen( port , () => console.log('Running on port ' + port));
+
