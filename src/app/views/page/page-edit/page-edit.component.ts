@@ -13,6 +13,7 @@ export class PageEditComponent implements OnInit {
     wid: string;
     pid: string;
     page: Page;
+    msg = '';
 
     constructor(private activateRoute: ActivatedRoute, private pageService: PageService, private router: Router) {
     }
@@ -43,5 +44,14 @@ export class PageEditComponent implements OnInit {
         );
 
         console.log(this.page);
+    }
+
+    onDelete() {
+        this.pageService.deletePage(this.pid).subscribe(
+            (data: any) => {
+                this.msg = data;
+            }
+        );
+        this.router.navigate(['../'], {relativeTo: this.activateRoute});
     }
 }

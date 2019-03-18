@@ -114,15 +114,12 @@ module.exports = function (app) {
     }
 
     function findAllWidgetsForPage(req, res) {
-        console.log('findAllWidgetsForPage');
         const pageId = req.params.pageId;
         res.json(getWidgetsForPage(pageId));
     }
 
     function findWidgetById(req, res) {
         var widgetId = req.params.widgetId;
-        console.log('widget.service.server:');
-        console.log(widgetId);
         for (const widget of WIDGETS) {
             console.log(widget);
             if (widget._id === widgetId) {
@@ -164,15 +161,17 @@ module.exports = function (app) {
     }
 
     function deleteWidget(req, res) {
-        WIDGETS.forEach((widget, index) => {
-            if (widget._id === widgetId) {
-                var pageId = widget.pageId;
-                WIDGETS.splice(index, 1);
-                res.json(findAllWidgetsForPage(pageId));
+        var widgetId = req.params['widgetId'];
+        for (var i = 0; i < WIDGETS.length; i++) {
+            if (WIDGETS[i]._id === widgetId) {
+                WIDGETS.splice(i, 1);
+                res.json("OK");
                 return;
             }
-        });
+        }
+        res.status(404).json("Widget with ID: " + widgetId + " cannot be found");
     }
+
 
     function array_swap(arr, old_index, new_index) {
         while (old_index < 0) {
@@ -188,7 +187,7 @@ module.exports = function (app) {
             }
         }
         arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-    };
+    }
 
 
     function reorderWidgets(req, res) {
@@ -269,3 +268,4 @@ module.exports = function (app) {
 
     }
 }
+

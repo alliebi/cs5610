@@ -9,9 +9,10 @@ import {Widget, WidgetHeading} from '../../../../models/widget.model.client';
     styleUrls: ['./widget-heading.component.css', '../../../../../css/style.css']
 })
 export class WidgetHeadingComponent implements OnInit {
-    widgetId: string;
     uid: string;
+    wid: string;
     pageId: string;
+    widgetId: string;
     newWidget: WidgetHeading;
     widget: Widget;
     newWidgetName: string;
@@ -27,8 +28,9 @@ export class WidgetHeadingComponent implements OnInit {
             .subscribe(
                 (params: Params) => {
                     this.uid = params['uid'];
-                    this.widgetId = params['wgid'];
+                    this.wid = params['wid'];
                     this.pageId = params['pid'];
+                    this.widgetId = params['wgid'];
                 }
             );
         if (this.widgetId !== 'undefined') {
@@ -56,7 +58,7 @@ export class WidgetHeadingComponent implements OnInit {
                 this.msg = data;
             }
         );
-        this.router.navigate(['../'], {relativeTo: this.route});
+        this.router.navigate(['/user', this.uid, 'website', this.wid, 'page', this.pageId, 'widget']);
     }
 
 }

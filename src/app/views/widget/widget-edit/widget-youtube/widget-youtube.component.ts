@@ -11,6 +11,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 export class WidgetYoutubeComponent implements OnInit {
     widgetId: string;
     uid: string;
+    wid: string;
     pageId: string;
     newWidget: WidgetYoutube;
     widget: Widget;
@@ -28,6 +29,7 @@ export class WidgetYoutubeComponent implements OnInit {
             .subscribe(
                 (params: Params) => {
                     this.uid = params['uid'];
+                    this.wid = params['wid'];
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                 }
@@ -57,6 +59,6 @@ export class WidgetYoutubeComponent implements OnInit {
                 this.msg = data;
             }
         );
-        this.router.navigate(['../'], {relativeTo: this.route});
+        this.router.navigate(['/user', this.uid, 'website', this.wid, 'page', this.pageId, 'widget']);
     }
 }

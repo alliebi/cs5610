@@ -33,9 +33,9 @@ export class PageNewComponent implements OnInit {
         this.pageService.createPage(this.wid, this.newPage).subscribe(
             (data: any) => {
                 this.newPage = data;
+                this.router.navigate(['user', this.uid, 'website', this.wid, 'page']);
             }
         );
-        this.router.navigate(['../'], {relativeTo: this.activateRoute});
     }
 
 }

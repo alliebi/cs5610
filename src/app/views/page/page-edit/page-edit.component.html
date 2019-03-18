@@ -43,7 +43,8 @@
                     [(ngModel)]="page.title">
         </div>
     </form>
-    <a class="btn btn-danger btn-block" [routerLink]="['/user', uid, 'website', wid, 'page']">Delete</a>
+    <a class="btn btn-danger btn-block" (click)="onDelete()">Delete</a>
+    <h3>{{msg}}</h3>
 </div>
 <nav class="navbar fixed-bottom bg-light">
     <div class="container-fuild col-12">

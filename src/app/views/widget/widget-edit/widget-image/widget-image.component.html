@@ -2,7 +2,7 @@
     <div class="row container-fluid">
         <div class="col-4">
             <div class="container-fluid">
-                <a [routerLink]="['../', 'new']" class="navbar-link cl-text-black cl-icon-padding">
+                <a [routerLink]="['../']" class="navbar-link cl-text-black cl-icon-padding">
                     <i class="fas fa-chevron-left fontawsome_icon"></i>
                 </a>
                 <a class="navbar-brand cl-text-bold cl-text-black" href="#">
@@ -69,21 +69,14 @@
 
     </form>
 
-
-    <a class="btn btn-primary btn-block "
-
-       [routerLink]="['/user'+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widgetId+'/flickr']">Choose From
-        Flickr</a>
-
-
     <a class="btn btn-danger  btn-block" (click)="onDelete()">Delete</a>
+    <h3>{{msg}}</h3>
 
-    <!--</form>-->
 </div>
 
 <nav class="navbar fixed-bottom bg-light">
     <div class="container-fuild col-12">
-        <a [routerLink]="['user', userId]" class="navbar-link navbar-text float-right cl-icon-padding">
+        <a routerLink="/user/{{userId}}" class="navbar-link navbar-text float-right cl-icon-padding">
             <i class="fas fa-user fontawsome_icon"></i>
         </a>
     </div>

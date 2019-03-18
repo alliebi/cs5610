@@ -13,7 +13,7 @@
     <ul class="list-group cl-list-group-borderless">
         <li *ngFor="let website of websites" class="list-group-item cl-list-item-borderless">
             <a [routerLink]="['/user', uid, 'website', website._id, 'page']">{{website.name}}</a>
-            <a [routerLink]="['/', website._id]">
+            <a [routerLink]="['./', website._id]">
                 <span class="fas fa-cog fontawsome_icon float-right"></span></a>
         </li>
 

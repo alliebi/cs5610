@@ -22,7 +22,7 @@ module.exports = function (app) {
         }
         page._id = Math.round(Math.random() * 1000).toString();
         page.websiteId = websiteId;
-        pages.push(page);
+        PAGES.push(page);
         res.json(page);
     }
 

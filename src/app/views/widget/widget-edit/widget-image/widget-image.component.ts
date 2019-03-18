@@ -22,7 +22,7 @@ export class WidgetImageComponent implements OnInit {
     localPath: string;
     URL: string;
     baseUrl: string;
-    msg: string;
+    msg = '';
 
     constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
         this.newWidget = new WidgetImage(this.newWidgetName, '', 'IMAGE', '', this.newWidgetWidth, '');
@@ -63,8 +63,9 @@ export class WidgetImageComponent implements OnInit {
         this.widgetService.deleteWidget(this.widgetId).subscribe(
             (data: any) => {
                 this.msg = data;
+                this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+
             }
         );
-        this.router.navigate(['../'], {relativeTo: this.route});
     }
 }
