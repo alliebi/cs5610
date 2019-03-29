@@ -10,7 +10,7 @@ export class PageService {
     }
     base_url = 'http://localhost:3200/';
 
-    createPage(websiteId: string, page: Page) {
+    createPage(websiteId: string, page) {
         const url = this.base_url + 'api/website/' + websiteId + '/page';
         return this.http.post(url, page);
     }

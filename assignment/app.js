@@ -1,6 +1,5 @@
-
-
 module.exports = function (app){
+    const db = require("./model/models.server");
 
     require("./services/user.service.server")(app);
     require("./services/website.service.server")(app);

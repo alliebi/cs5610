@@ -13,7 +13,7 @@ export class WidgetChooserComponent implements OnInit {
     wid: string;
     pid: string;
     wgid: string;
-    widget: Widget;
+    widget = {name: '', widgetType: '', pageId: ''};
 
     constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
     }
@@ -26,7 +26,7 @@ export class WidgetChooserComponent implements OnInit {
                     this.wid = params.wid;
                     this.pid = params.pid;
                     this.wgid = params.wgid;
-                    this.widget = {name: '', _id: '', widgetType: '', pageId: this.pid};
+                    this.widget = {name: '', widgetType: '', pageId: this.pid};
                 }
             );
     }
@@ -35,6 +35,9 @@ export class WidgetChooserComponent implements OnInit {
         console.log(newWidgetType);
 
         this.widget.widgetType = newWidgetType;
+        console.log('pid');
+        console.log(this.pid);
+        console.log(this.widget);
         this.widgetService.createWidget(this.pid, this.widget).subscribe(
             (data: any) => {
                 this.widget = data;

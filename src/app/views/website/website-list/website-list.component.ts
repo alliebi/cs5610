@@ -19,9 +19,8 @@ export class WebsiteListComponent implements OnInit {
         this.activatedRoute.params.subscribe(
             (params: any) => {
                 this.uid = params['uid'];
-                console.log('website-list uid:');
-                console.log(this.uid);
             });
+
         this.websiteService.findWebsitesByUser(this.uid).subscribe(
             (data: any) => {
                 this.websites = data;

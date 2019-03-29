@@ -9,7 +9,7 @@ export class WebsiteService {
 
     base_url = 'http://localhost:3200/';
 
-    createWebsite(userId: string, website: Website) {
+    createWebsite(userId: String, website) {
         const url = this.base_url + 'api/user/' + userId + '/website';
         return this.http.post(url, website);
     }

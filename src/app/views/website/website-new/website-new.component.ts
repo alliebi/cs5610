@@ -10,10 +10,10 @@ import {WebsiteService} from '../../../services/website.service.client';
     styleUrls: ['./website-new.component.css', '../../../../css/style.css']
 })
 export class WebsiteNewComponent implements OnInit {
-    uid: string;
-    newWebsite: Website;
-    newWebsiteName: string;
-    newWebsiteDescription: string;
+    uid: '';
+    newWebsite: {name: '', developerId: '', description: ''};
+    newWebsiteName: '';
+    newWebsiteDescription: '';
     websites: Website[];
     @ViewChild('f') websiteForm: NgForm;
 
@@ -29,18 +29,24 @@ export class WebsiteNewComponent implements OnInit {
             );
         this.websiteService.findWebsitesByUser(this.uid).subscribe(
             (data: any) => {
+                console.log('website-new on init');
+                console.log(data);
                 this.websites = data;
             }
         );
     }
 
     onSubmit() {
-        this.newWebsite = {_id: '', name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
+        this.newWebsite = {name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
+        console.log('newWebsite');
+        console.log(this.newWebsite);
         this.websiteService.createWebsite(this.uid, this.newWebsite).subscribe(
             (data: any) => {
+                console.log('response web');
+                console.log(data);
                 this.newWebsite = data;
+                this.router.navigate(['user', this.uid, 'website']);
             }
         );
-        this.router.navigate(['../'], {relativeTo: this.route});
     }
 }

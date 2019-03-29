@@ -29,24 +29,11 @@ export class ProfileComponent implements OnInit {
         this.userService.findUserById(this.uid).subscribe(
             (data: any) => {
                 this.user = data;
-                console.log(data);
             }
         );
     }
 
-    profile() {
-        // this.userService.findUserById(this.uid).subscribe(
-        //     (user: any) => {
-        //         if (user) {
-        //             this.user = user;
-        //             console.log(this.user);
-        //         } else {
-        //             this.errorFlag = true;
-        //         }
-        //
-        //     }
-        // );
-    }
+
 
     onUpdateUser() {
         console.log(this.user);

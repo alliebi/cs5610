@@ -12,7 +12,7 @@ import {NgForm} from '@angular/forms';
 export class PageNewComponent implements OnInit {
     uid: string;
     wid: string;
-    newPage: Page;
+    newPage = {name: '', wid: '', title: ''};
     newPageName: string;
     newTitle: string;
     @ViewChild('f') pageForm: NgForm;
@@ -29,10 +29,11 @@ export class PageNewComponent implements OnInit {
     }
 
     onSubmit() {
-        this.newPage = {_id: '', name: this.newPageName, wid: this.wid, title: this.newTitle};
+        this.newPage = {name: this.newPageName, wid: this.wid, title: this.newTitle};
         this.pageService.createPage(this.wid, this.newPage).subscribe(
             (data: any) => {
                 this.newPage = data;
+                console.log(data);
                 this.router.navigate(['user', this.uid, 'website', this.wid, 'page']);
             }
         );

@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="float-right">
-      <a (click)="onUpdateWidget()" class="cl-text-black cl-icon-padding">
+      <a (click)="onUpdate()" class="cl-text-black cl-icon-padding">
         <i class="fas fa-check fontawsome_icon"></i>
       </a>
     </div>
@@ -28,7 +28,7 @@
               class="form-control"
               name="widgetName"
               placeholder="Widget Name"
-              [(ngModel)]="newWidgetName">
+              [(ngModel)]="newWidget.name">
     </div>
     <div class="form-group">
       <label>Text</label>
@@ -37,7 +37,7 @@
               class="form-control"
               name="widgetText"
               placeholder="Widget Text"
-              [(ngModel)]="newWidgetText">
+              [(ngModel)]="newWidget.text">
     </div>
     <div class="form-group">
       <label>Size</label>
@@ -46,7 +46,7 @@
               class="form-control"
               name="widgetSize"
               placeholder="Widget Size"
-              [(ngModel)]="newWidgetSize">
+              [(ngModel)]="newWidget.size">
     </div>
     <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
   </form>

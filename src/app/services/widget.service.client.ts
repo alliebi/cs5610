@@ -1,4 +1,4 @@
-import {Widget, WidgetHeading, WidgetHtml, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
+import {Widget, WidgetHeading, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -9,7 +9,7 @@ export class WidgetService {
 
     base_url = 'http://localhost:3200/';
 
-    createWidget(pageId: string, widget: Widget) {
+    createWidget(pageId: string, widget) {
         const url = this.base_url + 'api/page/' + pageId + '/widget';
         return this.http.post(url, widget);
     }
@@ -35,7 +35,6 @@ export class WidgetService {
     }
 
     reorderWidgets(startIndex, endIndex, pageId) {
-
         const url = this.base_url + 'api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex;
         return this.http.put(url, '');
     }

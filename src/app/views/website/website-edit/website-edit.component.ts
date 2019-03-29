@@ -30,6 +30,7 @@ export class WebsiteEditComponent implements OnInit {
             );
         this.websiteService.findWebsitesByUser(this.uid).subscribe(
             (data: any) => {
+                console.log(data);
                 this.websites = data;
             }
         );

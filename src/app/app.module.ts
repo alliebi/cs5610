@@ -11,23 +11,25 @@ import {ProfileComponent} from './views/user/profile/profile.component';
 import {WebsiteListComponent} from './views/website/website-list/website-list.component';
 import {WebsiteNewComponent} from './views/website/website-new/website-new.component';
 import {WebsiteEditComponent} from './views/website/website-edit/website-edit.component';
-import { PageNewComponent } from './views/page/page-new/page-new.component';
-import { PageListComponent } from './views/page/page-list/page-list.component';
-import { PageEditComponent } from './views/page/page-edit/page-edit.component';
-import { WidgetChooserComponent } from './views/widget/widget-chooser/widget-chooser.component';
-import { WidgetEditComponent } from './views/widget/widget-edit/widget-edit.component';
-import { WidgetListComponent } from './views/widget/widget-list/widget-list.component';
-import { UserService } from './services/user.service.client';
-import { WebsiteService } from './services/website.service.client';
-import { PageService } from './services/page.service.client';
-import { WidgetService } from './services/widget.service.client';
-import { WidgetHeadingComponent } from './views/widget/widget-edit/widget-heading/widget-heading.component';
-import { WidgetImageComponent } from './views/widget/widget-edit/widget-image/widget-image.component';
-import { WidgetYoutubeComponent } from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
-import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
+import {PageNewComponent} from './views/page/page-new/page-new.component';
+import {PageListComponent} from './views/page/page-list/page-list.component';
+import {PageEditComponent} from './views/page/page-edit/page-edit.component';
+import {WidgetChooserComponent} from './views/widget/widget-chooser/widget-chooser.component';
+import {WidgetEditComponent} from './views/widget/widget-edit/widget-edit.component';
+import {WidgetListComponent} from './views/widget/widget-list/widget-list.component';
+import {UserService} from './services/user.service.client';
+import {WebsiteService} from './services/website.service.client';
+import {PageService} from './services/page.service.client';
+import {WidgetService} from './services/widget.service.client';
+import {WidgetHeadingComponent} from './views/widget/widget-edit/widget-heading/widget-heading.component';
+import {WidgetImageComponent} from './views/widget/widget-edit/widget-image/widget-image.component';
+import {WidgetYoutubeComponent} from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
+import {WidgetHtmlComponent} from './views/widget/widget-edit/widget-html/widget-html.component';
 import {SafePipe} from './services/safepipe';
-import { HttpClientModule } from '@angular/common/http';
-import { SortableDirective } from './directives/sortable.directive';
+import {HttpClientModule} from '@angular/common/http';
+import {SortableDirective} from './directives/sortable.directive';
+// import {QuillEditorModule} from 'ngx-quill-editor';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
     declarations: [
@@ -56,6 +58,8 @@ import { SortableDirective } from './directives/sortable.directive';
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
+        // QuillEditorModule,
+        QuillModule,
     ],
     providers: [UserService, WebsiteService, PageService, WidgetService],
     bootstrap: [AppComponent]

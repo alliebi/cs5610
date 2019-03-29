@@ -14,7 +14,6 @@ export class WidgetYoutubeComponent implements OnInit {
     wid: string;
     pageId: string;
     newWidget: WidgetYoutube;
-    widget: Widget;
     newWidgetName: string;
     newWidgetText = '';
     newWidgetWidth = '';
@@ -37,17 +36,17 @@ export class WidgetYoutubeComponent implements OnInit {
         if (this.widgetId !== 'undefined') {
             this.widgetService.findWidgetById(this.widgetId).subscribe(
                 (data: any) => {
-                    this.widget = data;
+                    this.newWidget = data;
                 }
             );
         }
+        this.newWidget = new WidgetYoutube(this.newWidgetName,  'YOUTUBE', this.pageId, '', this.newWidgetWidth, this.newWidgetURL);
     }
 
     onUpdateWidget() {
-        this.newWidget = new WidgetYoutube(this.newWidgetName, '', 'YOUTUBE', this.pageId, this.newWidgetWidth, this.newWidgetURL);
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
-                this.widget = data;
+                this.newWidget = data;
             }
         );
         this.router.navigate(['../'], {relativeTo: this.route});

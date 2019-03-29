@@ -15,17 +15,14 @@ export class WidgetImageComponent implements OnInit {
     widgetId: string;
     pageId: string;
     newWidget: WidgetImage;
-    widget: Widget;
-    newWidgetName: string;
-    newWidgetWidth = '';
-    newWidgetURL = '';
+    // widget: Widget;
     localPath: string;
     URL: string;
     baseUrl: string;
     msg = '';
 
     constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
-        this.newWidget = new WidgetImage(this.newWidgetName, '', 'IMAGE', '', this.newWidgetWidth, '');
+        this.newWidget = new WidgetImage('',  'IMAGE', '', '', '', '');
     }
 
     ngOnInit() {
@@ -41,7 +38,7 @@ export class WidgetImageComponent implements OnInit {
         if (this.widgetId !== 'undefined') {
             this.widgetService.findWidgetById(this.widgetId).subscribe(
                 (data: any) => {
-                    this.widget = data;
+                    this.newWidget = data;
                 }
             );
         }
@@ -49,11 +46,12 @@ export class WidgetImageComponent implements OnInit {
     }
 
     onUpdateWidget() {
-        this.URL = ((this.newWidgetURL === 'undefined') ? this.localPath : this.newWidgetURL);
-        this.newWidget.url = this.URL;
+        this.URL = ((this.newWidget.url === 'undefined') ? this.localPath : this.newWidget.url);
+        // this.newWidget.url = this.URL;
+        console.log(this.newWidget);
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
-                this.widget = data;
+                this.newWidget = data;
             }
         );
         this.router.navigate(['../'], {relativeTo: this.route});

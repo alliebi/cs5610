@@ -14,10 +14,6 @@ export class WidgetHeadingComponent implements OnInit {
     pageId: string;
     widgetId: string;
     newWidget: WidgetHeading;
-    widget: Widget;
-    newWidgetName: string;
-    newWidgetSize: number;
-    newWidgetText: string;
     msg: string;
 
     constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
@@ -36,17 +32,19 @@ export class WidgetHeadingComponent implements OnInit {
         if (this.widgetId !== 'undefined') {
             this.widgetService.findWidgetById(this.widgetId).subscribe(
                 (data: any) => {
-                    this.widget = data;
+                    this.newWidget = data;
                 }
             );
         }
+        this.newWidget = new WidgetHeading('', 'HEADING', '', '',  null);
     }
 
-    onUpdateWidget() {
-        this.newWidget = new WidgetHeading(this.newWidgetName, '', 'HEADING', '', this.newWidgetSize, this.newWidgetText);
+    onUpdate() {
+        console.log('widget heading onUpdate');
+        console.log(this.newWidget);
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
-                this.widget = data;
+                this.newWidget = data;
             }
         );
         this.router.navigate(['../'], {relativeTo: this.route});

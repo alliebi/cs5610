@@ -1,4 +1,3 @@
-import {User} from '../models/user.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -11,9 +10,10 @@ export class UserService {
 
     base_url = 'http://localhost:3200/';
 
-    createUser(user: User) {
-        const url = this.base_url + 'api/user/' + user._id;
+    createUser(user) {
+        const url = this.base_url + 'api/user';
         return this.http.post(url, user);
+        // newUser._id =
     }
 
     findUserByCredentials(username, password) {

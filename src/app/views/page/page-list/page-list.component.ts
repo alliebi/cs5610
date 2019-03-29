@@ -31,11 +31,10 @@ export class PageListComponent implements OnInit {
 
         this.pageService.findPageBywid(this.wid).subscribe(
             (data: any) => {
-                this.pages = data;
+                console.log(data);
+                this.pages = data.pages;
             }
         );
-        console.log('page list:' );
-        console.log(this.pages);
     }
 
 }
