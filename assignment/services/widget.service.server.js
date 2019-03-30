@@ -100,6 +100,7 @@ module.exports = function (app) {
         widgetModel
             .createWidget(pageId, req.body)
             .then(function (responseWidget) {
+                    console.log(responseWidget);
                     res.status(200).json(responseWidget);
                 },
                 function (error) {

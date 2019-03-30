@@ -19,7 +19,7 @@
     </div>
 </nav>
 
-<div class=" container-fluid cl-container-padding">
+<div class="container-fluid">
     <div class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
         <div *ngFor="let widget of widgets">
             <div [ngSwitch]="widget.widgetType">
@@ -47,10 +47,26 @@
                 <!--<a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', widget._id]" class="float-right text-blue">-->
                 <!--<i class="fas fa-cog"></i>-->
                 <!--</a>-->
-                <img *ngSwitchCase="'IMAGE'" [src]="widget.url">
-                <iframe *ngSwitchCase="'YOUTUBE'" width="640" height="360" [src]="widget.url|safe" rameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                <img *ngSwitchCase="'IMAGE'" class="image-widget" [src]="widget.url">
+                <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
+                    <iframe [src]="widget.url|safe" rameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <div *ngSwitchCase="'HTML'" class="html-widget">
+                    <span>{{widget.text}}</span>
+                </div>
+                <div *ngSwitchCase="'TEXT'">
+                    <div *ngIf="widget.formatted">
+                        <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+                    </div>
+                    <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+                           placeholder="{{widget.placeholder}}" class="form-control"/>
+
+                    <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                              class="form-control">{{widget.text}}</textarea>
+                </div>
                 <p *ngSwitchDefault><br><br></p>
                 <a [routerLink]="['/user', uid, 'website', wid, 'page', pid, 'widget', widget._id]"></a>
             </div>

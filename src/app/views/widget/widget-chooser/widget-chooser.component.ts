@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Widget} from '../../../models/widget.model.client';
 
+// @ts-ignore
 @Component({
     selector: 'app-widget-chooser',
     templateUrl: './widget-chooser.component.html',
@@ -35,12 +35,10 @@ export class WidgetChooserComponent implements OnInit {
         console.log(newWidgetType);
 
         this.widget.widgetType = newWidgetType;
-        console.log('pid');
-        console.log(this.pid);
-        console.log(this.widget);
         this.widgetService.createWidget(this.pid, this.widget).subscribe(
             (data: any) => {
                 this.widget = data;
+                console.log(data);
                 this.router.navigate(['user/', this.uid, 'website', this.wid, 'page', this.pid, 'widget', data._id]);
             }
         );

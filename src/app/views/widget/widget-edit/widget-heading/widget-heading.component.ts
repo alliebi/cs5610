@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget, WidgetHeading} from '../../../../models/widget.model.client';
 
+// @ts-ignore
 @Component({
     selector: 'app-widget-heading',
     templateUrl: './widget-heading.component.html',
