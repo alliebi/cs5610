@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment.prod';
 
 // injecting service into module
 @Injectable()
@@ -8,7 +9,7 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    base_url = 'http://localhost:3200/';
+    base_url = environment.baseUrl;
 
     createUser(user) {
         const url = this.base_url + 'api/user';

@@ -1,13 +1,14 @@
 import {Widget, WidgetHeading, WidgetImage, WidgetYoutube} from '../models/widget.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment.prod';
 
 @Injectable()
 export class WidgetService {
     constructor(private http: HttpClient) {
     }
 
-    base_url = 'http://localhost:3200/';
+    base_url = environment.baseUrl;
 
     createWidget(pageId: string, widget) {
         const url = this.base_url + 'api/page/' + pageId + '/widget';
