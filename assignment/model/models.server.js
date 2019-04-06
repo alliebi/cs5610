@@ -1,5 +1,5 @@
-// var connectionString = 'mongodb://127.0.0.1:27017/webdev';
-const connectionString = 'mongodb://admin:abc123456@ds017165.mlab.com:17165/heroku_xhj2gz7c';
+const connectionString = 'mongodb://127.0.0.1:27017/webdev';
+// const connectionString = 'mongodb://admin:abc123456@ds017165.mlab.com:17165/heroku_xhj2gz7c';
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;

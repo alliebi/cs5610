@@ -1,12 +1,11 @@
 import {Website} from '../models/website.model.client';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment.prod';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class WebsiteService {
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     base_url = environment.baseUrl;
 
@@ -19,12 +18,6 @@ export class WebsiteService {
         const url = this.base_url + 'api/user/' + userId + '/website';
         return this.http.get(url);
     }
-
-    // findWebsitesByUser2(userId: String) {
-    //     return this.websites.filter(function (website) {
-    //         return website.developerId === userId;
-    //     });
-    // }
 
     findWebsiteById(websiteId: String) {
         const url = this.base_url + 'api/website/' + websiteId;

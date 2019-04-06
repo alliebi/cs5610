@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
     selector: 'app-profile',
@@ -18,7 +19,11 @@ export class ProfileComponent implements OnInit {
     errorFlag: boolean;
     errorMsg = 'Invalid username or password !';
 
-    constructor(private router: Router, private userService: UserService, private activateRoute: ActivatedRoute) {
+    constructor(
+        private router: Router,
+        private userService: UserService,
+        private activateRoute: ActivatedRoute,
+        private sharedService: SharedService) {
     }
 
     ngOnInit() {
@@ -28,12 +33,11 @@ export class ProfileComponent implements OnInit {
             });
         this.userService.findUserById(this.uid).subscribe(
             (data: any) => {
+                console.log(data);
                 this.user = data;
             }
         );
     }
-
-
 
     onUpdateUser() {
         console.log(this.user);
@@ -53,5 +57,12 @@ export class ProfileComponent implements OnInit {
                 this.user = user;
             }
         );
+    }
+
+    logout() {
+        this.userService.logout().subscribe((data: any) => {
+            this.sharedService.user = null;
+            this.router.navigate(['/login']);
+        });
     }
 }

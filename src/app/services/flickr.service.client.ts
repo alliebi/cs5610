@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {text} from '@angular/core/src/render3';
 
 @Injectable() // needed as we're injecting Http service into this service
 export class FlickrService {

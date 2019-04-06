@@ -53,9 +53,7 @@
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                 </div>
-                <div *ngSwitchCase="'HTML'" class="html-widget">
-                    <span>{{widget.text}}</span>
-                </div>
+                <div *ngSwitchCase="'HTML'" class="html-widget"></div>
                 <div *ngSwitchCase="'TEXT'">
                     <div *ngIf="widget.formatted">
                         <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
