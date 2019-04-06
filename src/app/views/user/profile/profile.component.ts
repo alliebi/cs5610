@@ -27,10 +27,8 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.activateRoute.params.subscribe(
-            params => {
-                this.uid = params['uid'];
-            });
+        this.user = this.sharedService.user;
+        this.uid = this.sharedService.user._id;
         this.userService.findUserById(this.uid).subscribe(
             (data: any) => {
                 console.log(data);
@@ -40,7 +38,6 @@ export class ProfileComponent implements OnInit {
     }
 
     onUpdateUser() {
-        console.log(this.user);
         this.userService.updateUser(this.uid, this.user).subscribe(
             (user: any) => {
                 this.user = user;
