@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../../services/shared.service';
 
 @Component({
     selector: 'app-widget-text',
@@ -18,20 +19,21 @@ export class WidgetTextComponent implements OnInit {
     widgetId: string;
     widget = {placeholder: '', name: '', rows: '', text: '', formatted: false};
 
-    constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) {
+    errorFlag: boolean;
+    errorMsg = 'Widget name required!';
+
+    constructor(private widgetService: WidgetService,
+                private router: Router,
+                private activatedRoute: ActivatedRoute,
+                private sharedService: SharedService) {
     }
 
     ngOnInit() {
-
-        // initialize error and alert text
-        this.error = 'Enter the required field';
-        this.alert = '* Enter the required fields';
-
         // fetch ids from current url
         this.activatedRoute.params
             .subscribe(
                 (params: any) => {
-                    this.userId = params['uid'];
+                    this.userId = this.sharedService.user._id;
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                     this.websiteId = params['wid'];
@@ -47,10 +49,9 @@ export class WidgetTextComponent implements OnInit {
     }
 
     onUpdateWidget() {
-
         // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === undefined) {
-            this.flag = true;
+            this.errorFlag = true;
         } else {
             this.widgetService.updateWidget(this.widgetId, this.widget)
                 .subscribe(
@@ -61,7 +62,6 @@ export class WidgetTextComponent implements OnInit {
     }
 
     deleteWidget() {
-
         // call delete widget function from widget client service
         this.widgetService.deleteWidget(this.widgetId)
             .subscribe(

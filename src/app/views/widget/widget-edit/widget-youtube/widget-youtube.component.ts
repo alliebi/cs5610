@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Widget, WidgetYoutube} from '../../../../models/widget.model.client';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
+import {SharedService} from '../../../../services/shared.service';
 
 @Component({
     selector: 'app-widget-youtube',
@@ -15,19 +16,24 @@ export class WidgetYoutubeComponent implements OnInit {
     pageId: string;
     newWidget: WidgetYoutube;
     newWidgetName: string;
-    newWidgetText = '';
     newWidgetWidth = '';
     newWidgetURL = '';
     msg: string;
 
-    constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
+    errorFlag: boolean;
+    errorMsg = 'Widget name required!';
+
+    constructor(private route: ActivatedRoute,
+                private widgetService: WidgetService,
+                private router: Router,
+                private sharedService: SharedService) {
     }
 
     ngOnInit() {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.uid = params['uid'];
+                    this.uid = this.sharedService.user._id;
                     this.wid = params['wid'];
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
@@ -44,8 +50,13 @@ export class WidgetYoutubeComponent implements OnInit {
     }
 
     onUpdateWidget() {
+        if (!this.newWidget.name) {
+            this.errorFlag = true;
+            return;
+        }
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
+                this.errorFlag = false;
                 this.newWidget = data;
             }
         );

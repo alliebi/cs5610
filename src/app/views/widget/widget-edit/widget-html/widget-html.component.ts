@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
+import {SharedService} from '../../../../services/shared.service';
 
 @Component({
     selector: 'app-widget-html',
@@ -19,7 +20,10 @@ export class WidgetHtmlComponent implements OnInit {
     pageId: string;
     widgetId: string;
 
-    constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
+    constructor(private activatedRoute: ActivatedRoute,
+                private widgetService: WidgetService,
+                private router: Router,
+                private sharedService: SharedService) {
     }
 
     ngOnInit() {
@@ -32,7 +36,7 @@ export class WidgetHtmlComponent implements OnInit {
         this.activatedRoute.params
             .subscribe(
                 (params: any) => {
-                    this.userId = params['uid'];
+                    this.userId = this.sharedService.user._id;
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                     this.websiteId = params['wid'];
@@ -53,7 +57,6 @@ export class WidgetHtmlComponent implements OnInit {
     }
 
     onUpdate() {
-        console.log('onUpdate');
         // if name field is undefined then set error 'flag' to true making 'error' and 'alert' message visible
         if (this.widget['name'] === '') {
             this.flag = true;
@@ -67,7 +70,6 @@ export class WidgetHtmlComponent implements OnInit {
     }
 
     onDelete() {
-        console.log('onDelete');
         // call delete widget function from widget client service
         this.widgetService.deleteWidget(this.widgetId)
             .subscribe(

@@ -1,4 +1,8 @@
 <div>
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+    </div>
+
     <nav class="navbar fixed-top cl-blue-navbar">
         <div class="container-fluid ">
             <div class="col-1 ">

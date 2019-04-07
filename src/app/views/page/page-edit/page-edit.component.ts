@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../../../models/page.model.client';
 import {PageService} from '../../../services/page.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
     selector: 'app-page-edit',
@@ -15,35 +16,42 @@ export class PageEditComponent implements OnInit {
     page: Page;
     msg = '';
 
-    constructor(private activateRoute: ActivatedRoute, private pageService: PageService, private router: Router) {
-    }
+    errorFlag: boolean;
+    errorMsg = 'Page name required!';
+
+    constructor(private activateRoute: ActivatedRoute,
+                private pageService: PageService,
+                private router: Router,
+                private sharedService: SharedService) {}
 
     ngOnInit() {
         this.activateRoute.params.subscribe(
             (params: any) => {
-                this.uid = params['uid'];
+                this.uid = this.sharedService.user._id;
                 this.wid = params['wid'];
                 this.pid = params['pid'];
+
+                this.pageService.findPageById(this.pid).subscribe(
+                    (data: any) => {
+                        this.page = data;
+                    }
+                );
             });
-        this.pageService.findPageById(this.pid).subscribe(
-            (data: any) => {
-                this.page = data;
-            }
-        );
-        console.log('page edit:');
-        console.log(this.page);
     }
 
     onUpdate() {
+        if (!this.page.name) {
+            this.errorFlag = true;
+            return;
+        }
         this.pageService.updatePage(this.pid, this.page).subscribe(
             (data: any) => {
+                this.errorFlag = false;
                 this.page = data;
                 this.router.navigate(['/user', this.uid, 'website', this.wid, 'page']);
 
             }
         );
-
-        console.log(this.page);
     }
 
     onDelete() {

@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="float-right">
-            <a [routerLink]="['../']" (click)="onSubmit()" class="cl-text-black navbar-link float-right">
+            <a (click)="onSubmit()" class="cl-text-black navbar-link float-right">
                 <i class="fas fa-check fontawsome_icon"></i>
             </a>
         </div>
@@ -19,6 +19,9 @@
     </div>
 </nav>
 <div class="container-fluid cl-container-padding">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+    </div>
     <form #f="ngForm">
         <div class="form-group">
             <label for="page-name">Name</label>

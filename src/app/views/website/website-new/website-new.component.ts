@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Website} from '../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
 import {WebsiteService} from '../../../services/website.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
     selector: 'app-website-new',
@@ -11,42 +12,52 @@ import {WebsiteService} from '../../../services/website.service.client';
 })
 export class WebsiteNewComponent implements OnInit {
     uid: '';
-    newWebsite: {name: '', developerId: '', description: ''};
+    newWebsite: { name: '', developerId: '', description: '' };
     newWebsiteName: '';
     newWebsiteDescription: '';
     websites: Website[];
     @ViewChild('f') websiteForm: NgForm;
 
-    constructor(private websiteService: WebsiteService, private route: ActivatedRoute, private router: Router) {
+    errorFlag: boolean;
+    errorMsg = 'Website name required!';
+
+    constructor(
+        private websiteService: WebsiteService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private sharedService: SharedService) {
     }
 
     ngOnInit() {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.uid = params['uid'];
+                    this.uid = this.sharedService.user._id;
+                    this.websiteService.findWebsitesByUser(this.uid).subscribe(
+                        (data: any) => {
+                            console.log('website-new on init');
+                            console.log(data);
+                            this.websites = data;
+                        }
+                    );
                 }
             );
-        this.websiteService.findWebsitesByUser(this.uid).subscribe(
-            (data: any) => {
-                console.log('website-new on init');
-                console.log(data);
-                this.websites = data;
-            }
-        );
     }
 
     onSubmit() {
-        this.newWebsite = {name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
-        console.log('newWebsite');
-        console.log(this.newWebsite);
-        this.websiteService.createWebsite(this.uid, this.newWebsite).subscribe(
-            (data: any) => {
-                console.log('response web');
-                console.log(data);
-                this.newWebsite = data;
-                this.router.navigate(['user', this.uid, 'website']);
-            }
-        );
+        if (this.newWebsiteName === null || this.newWebsiteName === '') {
+            this.errorFlag = true;
+        } else {
+            this.newWebsite = {name: this.newWebsiteName, developerId: this.uid, description: this.newWebsiteDescription};
+            this.websiteService.createWebsite(this.uid, this.newWebsite).subscribe(
+                (data: any) => {
+                    console.log('response web');
+                    console.log(data);
+                    this.errorFlag = false;
+                    this.newWebsite = data;
+                    this.router.navigate(['user', this.uid, 'website']);
+                }
+            );
+        }
     }
 }

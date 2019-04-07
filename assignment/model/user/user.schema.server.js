@@ -5,7 +5,11 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
-    websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'websiteModel'}]
+    websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'websiteModel'}],
+    facebook: {
+        id: String,
+        token: String,
+    }
 });
 
 module.exports = userSchema;

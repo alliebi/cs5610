@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     username: string; // see usage as two-way data binding
     password: string; // see usage as two-way data binding
     uid: string;
+
     errorFlag: boolean;
     errorMsg = 'Invalid username or password !';
 
@@ -26,15 +27,30 @@ export class LoginComponent implements OnInit {
     login() {
         this.username = this.loginForm.value.username;
         this.password = this.loginForm.value.password;
+        if (this.username === null || this.password === null) {
+            this.errorFlag = true;
+            this.errorMsg = 'Username, password or verify password required.';
+        } else {
+            this.userService
+                .login(this.username, this.password)
+                .subscribe((data: any) => {
+                    if (data) {
+                        this.sharedService.user = data;
+                        this.errorFlag = false;
+                        this.router.navigate(['/profile']);
+                    } else {
+                        this.errorFlag = true;
+                        console.log(this.errorMsg);
+                    }
+                }, (error: any) => {
+                    if (error) {
+                        this.errorFlag = true;
+                        this.errorMsg = error;
+                        console.log(this.errorMsg);
 
-        this.userService
-            .login(this.username, this.password)
-            .subscribe((data: any) => {
-                this.sharedService.user = data;
-                this.router.navigate(['/profile']);
-            }, (error: any) => {
-                console.log(error);
-            });
+                    }
+                });
+        }
     }
 
     ngOnInit() {

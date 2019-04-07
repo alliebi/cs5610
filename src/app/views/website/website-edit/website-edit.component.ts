@@ -3,6 +3,7 @@ import {Website} from '../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
     selector: 'app-website-edit',
@@ -17,34 +18,37 @@ export class WebsiteEditComponent implements OnInit {
     msg: string;
     @ViewChild('f') websiteForm: NgForm;
 
-    constructor(private websiteService: WebsiteService, private route: ActivatedRoute, private router: Router) {
-    }
+    errorFlag: boolean;
+    errorMsg = 'Website name required!';
+
+    constructor(
+        private websiteService: WebsiteService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private sharedService: SharedService) {}
 
     ngOnInit() {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.uid = params['uid'];
+                    this.uid = this.sharedService.user._id;
                     this.websiteId = params['wid'];
+                    this.websiteService.findWebsitesByUser(this.uid).subscribe(
+                        (data: any) => {
+                            console.log(data);
+                            this.websites = data;
+                        }
+                    );
+                    this.websiteService.findWebsiteById(this.websiteId).subscribe(
+                        (data: any) => {
+                            this.website = data;
+                        }
+                    );
                 }
             );
-        this.websiteService.findWebsitesByUser(this.uid).subscribe(
-            (data: any) => {
-                console.log(data);
-                this.websites = data;
-            }
-        );
-        this.websiteService.findWebsiteById(this.websiteId).subscribe(
-            (data: any) => {
-                this.website = data;
-            }
-        );
     }
 
     onEditWebsite(websiteId) {
-        // const updated = this.websiteService.findWebsiteById(websiteId);
-        // this.website = updated;
-
         this.websiteService.findWebsiteById(websiteId).subscribe(
             (data: any) => {
                 this.website = data;
@@ -54,8 +58,13 @@ export class WebsiteEditComponent implements OnInit {
     }
 
     onUpdateWebsite() {
+        if (!this.website.name) {
+            this.errorFlag = true;
+            return;
+        }
         this.websiteService.updateWebsite(this.websiteId, this.website).subscribe(
             (data: any) => {
+                this.errorFlag = false;
                 this.website = data;
             }
         );

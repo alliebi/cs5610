@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service';
 
 // @ts-ignore
 @Component({
@@ -15,14 +16,16 @@ export class WidgetChooserComponent implements OnInit {
     wgid: string;
     widget = {name: '', widgetType: '', pageId: ''};
 
-    constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
-    }
+    constructor(private widgetService: WidgetService,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private sharedService: SharedService) {}
 
     ngOnInit() {
         this.activatedRoute.params
             .subscribe(
                 (params: Params) => {
-                    this.uid = params.uid;
+                    this.uid = this.sharedService.user._id;
                     this.wid = params.wid;
                     this.pid = params.pid;
                     this.wgid = params.wgid;
@@ -32,8 +35,6 @@ export class WidgetChooserComponent implements OnInit {
     }
 
     onSubmit(newWidgetType: string) {
-        console.log(newWidgetType);
-
         this.widget.widgetType = newWidgetType;
         this.widgetService.createWidget(this.pid, this.widget).subscribe(
             (data: any) => {
@@ -42,16 +43,6 @@ export class WidgetChooserComponent implements OnInit {
                 this.router.navigate(['user/', this.uid, 'website', this.wid, 'page', this.pid, 'widget', data._id]);
             }
         );
-        // switch (this.widget.widgetType) {
-        //     case 'HEADING':
-        //         // code block
-        //         break;
-        //     case 'IMAGE':
-        //         // code block
-        //         break;
-        //     default:
-        //     // code block
-        // }
     }
 
 }

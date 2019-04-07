@@ -18,8 +18,7 @@
                 <a class="cl-text-white navbar-brand cl-text-bold float-left" href="#">
                     Edit Website
                 </a>
-                <a [routerLink]="['/user', uid, 'website']" (click)="onUpdateWebsite()"
-                   class="navbar-link cl-text-white ">
+                <a (click)="onUpdateWebsite()" class="navbar-link cl-text-white ">
                     <i class="fas fa-check fontawsome_icon float-right"></i>
                 </a>
             </div>
@@ -28,6 +27,10 @@
 </nav>
 
 <div class="container-fluid cl-container-padding">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+    </div>
+
     <div class="row">
         <div class="col-sm-4 d-none d-sm-block">
             <div class="form-control" *ngFor="let website of websites">

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="float-right">
-            <a  (click)="onUpdate() "  [routerLink]="['/user', uid, 'website', wid, 'page']" class="cl-text-white navbar-link cl-icon-padding">
+            <a  (click)="onUpdate()" class="cl-text-white navbar-link cl-icon-padding">
                 <i class="fas fa-check fontawsome_icon"></i>
             </a>
         </div>
@@ -21,6 +21,9 @@
 
 </nav>
 <div class="container">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+    </div>
     <form>
         <div class="form-group">
             <label for="page-name">Name</label>

@@ -1,6 +1,7 @@
 module.exports = function (app) {
     const passport = require('passport');
     const LocalStrategy = require('passport-local').Strategy;
+    const FacebookStrategy = require('passport-facebook').Strategy;
     const userModel = require("../model/user/user.model.server");
     const bcrypt = require('bcrypt-nodejs');
 
@@ -13,10 +14,22 @@ module.exports = function (app) {
     app.post("/api/logout", logout);
     app.post("/api/register", register);
     app.post("/api/loggedin", loggedin);
+    app.get('/facebook/login', passport.authenticate('facebook', {scope: 'email'}));
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/#/profile',
+        failureRedirect: '/#/login'
+    }));
+
+    const facebookConfig = {
+        clientID: '123',
+        clientSecret: '123',
+        callbackURL: '123',
+    }
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
     passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     // Authentication
     function serializeUser(user, done) {
@@ -87,6 +100,37 @@ module.exports = function (app) {
                     }
                 }
             );
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function (user) {
+                    if (user) {
+                        return done(null, user);
+                    } else {
+                        const names = profile.displayName.split(" ");
+                        const newFacebookUser = {
+                            lastName: names[1],
+                            firstName: names[0],
+                            email: profile.emails ? profile.emails[0].value : "",
+                            facebook: {id: profile.id, token: token}
+                        };
+                        return userModel.createUser(newFacebookUser);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }).then(function (user) {
+            return done(null, user);
+        }, function (err) {
+            if (err) {
+                return done(err);
+            }
+        });
     }
 
     // CRUD for users

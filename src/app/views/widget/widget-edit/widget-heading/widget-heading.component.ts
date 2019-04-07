@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget, WidgetHeading} from '../../../../models/widget.model.client';
+import {SharedService} from '../../../../services/shared.service';
 
 // @ts-ignore
 @Component({
@@ -17,14 +18,20 @@ export class WidgetHeadingComponent implements OnInit {
     newWidget: WidgetHeading;
     msg: string;
 
-    constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
+    errorFlag: boolean;
+    errorMsg = 'Widget name required!';
+
+    constructor(private route: ActivatedRoute,
+                private widgetService: WidgetService,
+                private router: Router,
+                private sharedService: SharedService) {
     }
 
     ngOnInit() {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.uid = params['uid'];
+                    this.uid = this.sharedService.user._id;
                     this.wid = params['wid'];
                     this.pageId = params['pid'];
                     this.widgetId = params['wgid'];
@@ -37,14 +44,17 @@ export class WidgetHeadingComponent implements OnInit {
                 }
             );
         }
-        this.newWidget = new WidgetHeading('', 'HEADING', '', '',  null);
+        this.newWidget = new WidgetHeading('', 'HEADING', '', '', null);
     }
 
     onUpdate() {
-        console.log('widget heading onUpdate');
-        console.log(this.newWidget);
+        if (!this.newWidget.name) {
+            this.errorFlag = true;
+            return;
+        }
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
+                this.errorFlag = false;
                 this.newWidget = data;
             }
         );

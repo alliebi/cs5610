@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {Widget, WidgetImage} from '../../../../models/widget.model.client';
+import {WidgetImage} from '../../../../models/widget.model.client';
 import {environment} from '../../../../../environments/environment';
+import {SharedService} from '../../../../services/shared.service';
 
 @Component({
     selector: 'app-widget-image',
@@ -21,15 +22,21 @@ export class WidgetImageComponent implements OnInit {
     baseUrl: string;
     msg = '';
 
-    constructor(private route: ActivatedRoute, private widgetService: WidgetService, private router: Router) {
-        this.newWidget = new WidgetImage('',  'IMAGE', '', '', '', '');
+    errorFlag: boolean;
+    errorMsg = 'Widget name required!';
+
+    constructor(private route: ActivatedRoute,
+                private widgetService: WidgetService,
+                private router: Router,
+                private sharedService: SharedService) {
+        this.newWidget = new WidgetImage('', 'IMAGE', '', '', '', '');
     }
 
     ngOnInit() {
         this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.userId = params['uid'];
+                    this.userId = this.sharedService.user._id;
                     this.widgetId = params['wgid'];
                     this.pageId = params['pid'];
                     this.websiteId = params['wid'];
@@ -46,11 +53,14 @@ export class WidgetImageComponent implements OnInit {
     }
 
     onUpdateWidget() {
+        if (!this.newWidget.name) {
+            this.errorFlag = true;
+            return;
+        }
         this.URL = ((this.newWidget.url === 'undefined') ? this.localPath : this.newWidget.url);
-        // this.newWidget.url = this.URL;
-        console.log(this.newWidget);
         this.widgetService.updateWidget(this.widgetId, this.newWidget).subscribe(
             (data: any) => {
+                this.errorFlag = false;
                 this.newWidget = data;
             }
         );
