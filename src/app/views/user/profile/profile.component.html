@@ -1,7 +1,8 @@
 <nav class="navbar bg-primary navbar-fixed-top">
     <div class="container-fluid ">
         <a class="navbar-brand cl-text-white" routerLink="/profile">Profile</a>
-        <a (click)="onUpdateUser()" class="btn-primary navbar-text pull-right"><span class="fas fa-check cl-text-white"></span></a>
+        <a (click)="onUpdateUser()" class="btn-primary navbar-text pull-right"><span
+                class="fas fa-check cl-text-white"></span></a>
     </div>
 </nav>
 
@@ -50,7 +51,6 @@
                    [(ngModel)]="user.firstName"
                    required
                    #firstName="ngModel"
-
             />
         </div>
         <div class="form-group">
@@ -71,7 +71,7 @@
             </a>
         </div>
         <div>
-            <a (click)="logout()" class="btn btn-danger btn-block" routerLink="/login">Logout</a>
+            <a (click)="logout()" class="btn btn-danger btn-block">Logout</a>
         </div>
     </form>
 </div>
