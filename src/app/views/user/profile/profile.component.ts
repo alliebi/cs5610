@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
         this.uid = this.sharedService.user._id;
         this.userService.findUserById(this.uid).subscribe(
             (data: any) => {
-                console.log(data);
+                // console.log(data);
                 this.user = data;
             }
         );
@@ -41,8 +41,8 @@ export class ProfileComponent implements OnInit {
         this.userService.updateUser(this.uid, this.user).subscribe(
             (user: any) => {
                 this.user = user;
-                console.log('user.client');
-                console.log(this.user);
+                // console.log('user.client');
+                // console.log(this.user);
                 this.router.navigate(['/user', user._id]);
             }
         );

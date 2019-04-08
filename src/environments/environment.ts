@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  baseUrl: 'http://localhost:3200/'
+  // production: false,
+  // baseUrl: 'http://localhost:3200/',
+  // mongodbUrl: 'mongodb://127.0.0.1:27017/webdev',
+  production: true,
+  baseUrl: 'https://webdev-anqi-cs5610.herokuapp.com/',
+  mongodbUrl: 'mongodb://admin:abc123456@ds017165.mlab.com:17165/heroku_xhj2gz7c',
 };
 
 /*

@@ -1,15 +1,15 @@
 <nav class="navbar bg-primary navbar-fixed-top">
     <div class="container-fluid ">
-        <a class="navbar-brand cl-text-white" routerLink="">Profile</a>
+        <a class="navbar-brand cl-text-white" routerLink="/profile">Profile</a>
         <a (click)="onUpdateUser()" class="btn-primary navbar-text pull-right"><span class="fas fa-check cl-text-white"></span></a>
     </div>
 </nav>
 
-<div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
-</div>
+<div class="container-fluid">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
+    </div>
 
-<div class="container-main">
     <form (ngSubmit)="onUpdateUser()" #f="ngForm">
         <div class="form-group">
             <label for="username">Username</label>

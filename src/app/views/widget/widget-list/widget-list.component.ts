@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {Widget} from '../../../models/widget.model.client';
 import {PageService} from '../../../services/page.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
     selector: 'app-widget-list',
@@ -15,19 +16,22 @@ export class WidgetListComponent implements OnInit {
     pid: string;
     widgets: Widget[];
 
-    constructor(private activateRoute: ActivatedRoute, private pageService: PageService, private widgetService: WidgetService) {
+    constructor(private activateRoute: ActivatedRoute,
+                private pageService: PageService,
+                private widgetService: WidgetService,
+                private sharedService: SharedService) {
     }
 
     ngOnInit() {
         this.activateRoute.params.subscribe(
             (params: any) => {
-                this.uid = params['uid'];
+                this.uid = this.sharedService.user._id;
                 this.wid = params['wid'];
                 this.pid = params['pid'];
                 this.widgetService.findWidgetsByPageId(this.pid).subscribe(
                     (data: any) => {
-                        console.log('pageService findPageById data');
-                        console.log(data);
+                        // console.log('pageService findPageById data');
+                        // console.log(data);
                         this.widgets = data;
                     }
                 );

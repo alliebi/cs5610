@@ -16,14 +16,14 @@ module.exports = function (app) {
     app.post("/api/loggedin", loggedin);
     app.get('/facebook/login', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '/#/profile',
-        failureRedirect: '/#/login'
+        successRedirect: '/profile',
+        failureRedirect: '/login'
     }));
 
     const facebookConfig = {
-        clientID: '123',
-        clientSecret: '123',
-        callbackURL: '123',
+        clientID: process.env.FB_CLIENT_ID,
+        clientSecret: process.env.FB_CLIENT_SECRET,
+        callbackURL: '/auth/facebook/callback',
     }
 
     passport.serializeUser(serializeUser);
@@ -44,6 +44,45 @@ module.exports = function (app) {
             function (err) {
                 done(err, null);
             });
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function (user) {
+                    if (user) {
+                        // console.log('Found');
+                        // console.log(user);
+                        return done(null, user);
+                    } else {
+                        // console.log('Create new');
+                        // console.log(profile);
+                        const names = profile.displayName.split(" ");
+                        const newFacebookUser = {
+                            lastName: names[1],
+                            firstName: names[0],
+                            email: profile.emails ? profile.emails[0].value : "",
+                            facebook: {id: profile.id, token: token}
+                        };
+                        return userModel.createUser(newFacebookUser);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                })
+            .then(
+                function (user) {
+                    return done(null, user);
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
     }
 
     function localStrategy(username, password, done) {
@@ -83,7 +122,6 @@ module.exports = function (app) {
 
     function register(req, res) {
         const user = req.body;
-        console.log(req.body);
         user.password = bcrypt.hashSync(user.password);
         userModel
             .createUser(user)
@@ -102,48 +140,17 @@ module.exports = function (app) {
             );
     }
 
-    function facebookStrategy(token, refreshToken, profile, done) {
-        userModel
-            .findUserByFacebookId(profile.id)
-            .then(
-                function (user) {
-                    if (user) {
-                        return done(null, user);
-                    } else {
-                        const names = profile.displayName.split(" ");
-                        const newFacebookUser = {
-                            lastName: names[1],
-                            firstName: names[0],
-                            email: profile.emails ? profile.emails[0].value : "",
-                            facebook: {id: profile.id, token: token}
-                        };
-                        return userModel.createUser(newFacebookUser);
-                    }
-                },
-                function (err) {
-                    if (err) {
-                        return done(err);
-                    }
-                }).then(function (user) {
-            return done(null, user);
-        }, function (err) {
-            if (err) {
-                return done(err);
-            }
-        });
-    }
-
     // CRUD for users
     function createUser(req, res) {
         userModel
             .createUser(req.body)
             .then(function (newUser) {
-                    console.log('Create User Callback');
-                    console.log(newUser);
+                    // console.log('Create User Callback');
+                    // console.log(newUser);
                     res.status(200).send(newUser);
                 },
                 function (error) {
-                    console.log("create error" + error);
+                    // console.log("create error" + error);
                     res.status(404);
                 });
     }
@@ -189,8 +196,7 @@ module.exports = function (app) {
     function updateUser(req, res) {
         const userId = req.params['userId'];
         const user = req.body;
-        console.log(req.body);
-        console.log("update user: " + userId + " " + user.firstName + " " + user.lastName);
+
         userModel.updateUser(userId, user).exec(
             function (err, user) {
                 if (err) {
