@@ -22,12 +22,11 @@ export class WebsiteListComponent implements OnInit {
         this.activatedRoute.params.subscribe(
             (params: any) => {
                 this.uid = this.sharedService.user._id;
+                this.websiteService.findWebsitesByUser(this.uid).subscribe(
+                    (data: any) => {
+                        this.websites = data;
+                    }
+                );
             });
-
-        this.websiteService.findWebsitesByUser(this.uid).subscribe(
-            (data: any) => {
-                this.websites = data;
-            }
-        );
     }
 }
