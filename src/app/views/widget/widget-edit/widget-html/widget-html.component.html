@@ -1,71 +1,70 @@
-
 <!--Header-->
 <nav class="navbar fixed-top navbar-light bg-light">
-  <div class="row container-fluid">
-    <div class="col-4">
-      <div class="container-fluid">
-        <a [routerLink]="['../']" class="navbar-link cl-text-black cl-icon-padding">
-          <i class="fas fa-chevron-left fontawsome_icon"></i>
-        </a>
-        <a class="navbar-brand cl-text-bold cl-text-black" href="#">
-          Widget Edit
-        </a>
-      </div>
+    <div class="row container-fluid">
+        <div class="col-4">
+            <div class="container-fluid">
+                <a [routerLink]="['../']" class="navbar-link cl-text-black cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                </a>
+                <div class="navbar-brand cl-text-bold cl-text-black">
+                    Widget Edit
+                </div>
+            </div>
+        </div>
+        <div class="float-right">
+            <a (click)="onUpdate()" class="cl-text-black cl-icon-padding">
+                <i class="fas fa-check fontawsome_icon"></i>
+            </a>
+        </div>
     </div>
-    <div class="float-right">
-      <a (click)="onUpdate()" class="cl-text-black cl-icon-padding">
-        <i class="fas fa-check fontawsome_icon"></i>
-      </a>
-    </div>
-  </div>
 </nav>
 
 <div class="container">
-  <div *ngIf="flag"
-       class="alert alert-danger">
-    {{error}}
-  </div>
-  <form novalidate name="model.myform">
-    <div class="form-group">
-      <label for="Name">Name</label>
-      <input [(ngModel)]="widget.name"
-             type="text"
-             class="form-control"
-             id="Name"
-             name="widname"
-             placeholder="Name"
-             required>
-      <span class="alert-class"
-            *ngIf="flag">{{alert}}</span>
+    <div *ngIf="flag"
+         class="alert alert-danger">
+        {{error}}
     </div>
-    <!--<div ng-model="model.widget.text"-->
-    <!--text-angular-->
-    <!--ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],-->
-    <!--['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],-->
-    <!--['indent','outdent'],['html']]">-->
-    <!--</div>-->
+    <form novalidate name="model.myform">
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input [(ngModel)]="widget.name"
+                   type="text"
+                   class="form-control"
+                   id="Name"
+                   name="widname"
+                   placeholder="Name"
+                   required>
+            <span class="alert-class"
+                  *ngIf="flag">{{alert}}</span>
+        </div>
+        <!--<div ng-model="model.widget.text"-->
+        <!--text-angular-->
+        <!--ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],-->
+        <!--['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],-->
+        <!--['indent','outdent'],['html']]">-->
+        <!--</div>-->
 
-    <!-- use with ngModel -->
-    <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
-    <!--[options]="editorOptions"-->
-    <!--(blur)="onEditorBlured($event)"-->
-    <!--(focus)="onEditorFocused($event)"-->
-    <!--(ready)="onEditorCreated($event)"-->
-    <!--(change)="onContentChanged($event)"-->
-  </form>
-  <p></p>
+        <!-- use with ngModel -->
+        <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        <!--[options]="editorOptions"-->
+        <!--(blur)="onEditorBlured($event)"-->
+        <!--(focus)="onEditorFocused($event)"-->
+        <!--(ready)="onEditorCreated($event)"-->
+        <!--(change)="onContentChanged($event)"-->
+    </form>
+    <p></p>
 
-  <a class="btn btn-danger btn-block "
-     (click)="onDelete()">Delete</a>
+    <a class="btn btn-danger btn-block "
+       (click)="onDelete()">Delete</a>
 
 </div>
 
 <!-- Footer -->
 <nav class="navbar fixed-bottom bg-light">
-  <div class="container-fuild col-12">
-    <a routerLink="/user/{{uid}}" class="navbar-link navbar-text float-right cl-icon-padding">
-      <i class="fas fa-user fontawsome_icon"></i>
-    </a>
-  </div>
+    <div class="container-fuild col-12">
+        <a routerLink="/user/{{uid}}" class="navbar-link navbar-text float-right cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
 </nav>
 

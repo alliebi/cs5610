@@ -11,9 +11,9 @@
                 </a>
             </div>
             <div class="col-3 d-none d-md-block">
-                <a class="cl-text-white navbar-brand cl-text-bold" href="#">
+                <span class="cl-text-white navbar-brand cl-text-bold">
                     Websites
-                </a>
+                </span>
             </div>
             <div class="col-8">
                 <a class="cl-text-white navbar-brand cl-text-bold float-left" href="#">
@@ -31,7 +31,7 @@
         <div class="container-fluid ">
             <a [routerLink]="['/user', uid]" class="navbar-brand float-left">
                 <span id="left-chev" class="fas fa-chevron-left cl-text-white"> Website</span>
-            </a>
+            </a>[routerLink]
             <a [routerLink]="['/user', uid, 'website']" class="navbar-brand cl-text-white cl-icon-padding pull-right">
                 <span id="icon-plus" class="fas fa-plus fontawsome_icon"></span>
             </a>
@@ -75,8 +75,7 @@
                                 rows="5"
                                 [(ngModel)]="newWebsiteDescription"></textarea>
                     </div>
-                    <button
-                            class="btn btn-primary btn-block"
+                    <button class="btn btn-primary btn-block"
                             type="submit"
                             [disabled]="!f.valid">
                         Submit

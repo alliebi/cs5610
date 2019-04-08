@@ -1,65 +1,64 @@
-
 <nav class="navbar fixed-top navbar-light bg-light">
-  <div class="row container-fluid">
-    <div class="col-4">
-      <div class="container-fluid">
-        <a [routerLink]="['../']" class="navbar-link cl-text-black cl-icon-padding">
-          <i class="fas fa-chevron-left fontawsome_icon"></i>
-        </a>
-        <a class="navbar-brand cl-text-bold cl-text-black" href="#">
-          Widget Edit
-        </a>
-      </div>
+    <div class="row container-fluid">
+        <div class="col-4">
+            <div class="container-fluid">
+                <a [routerLink]="['../']" class="navbar-link cl-text-black cl-icon-padding">
+                    <i class="fas fa-chevron-left fontawsome_icon"></i>
+                </a>
+                <div class="navbar-brand cl-text-bold cl-text-black">
+                    Widget Edit
+                </div>
+            </div>
+        </div>
+        <div class="float-right">
+            <a (click)="onUpdate()" class="cl-text-black cl-icon-padding">
+                <i class="fas fa-check fontawsome_icon"></i>
+            </a>
+        </div>
     </div>
-    <div class="float-right">
-      <a (click)="onUpdate()" class="cl-text-black cl-icon-padding">
-        <i class="fas fa-check fontawsome_icon"></i>
-      </a>
-    </div>
-  </div>
 </nav>
 
 <div class="container">
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
-  </div>
-  <form>
-    <div class="form-group">
-      <label>Name</label>
-      <input
-              type="text"
-              class="form-control"
-              name="widgetName"
-              placeholder="Widget Name"
-              [(ngModel)]="newWidget.name">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+        {{errorMsg}}
     </div>
-    <div class="form-group">
-      <label>Text</label>
-      <input
-              type="text"
-              class="form-control"
-              name="widgetText"
-              placeholder="Widget Text"
-              [(ngModel)]="newWidget.text">
-    </div>
-    <div class="form-group">
-      <label>Size</label>
-      <input
-              type="number"
-              class="form-control"
-              name="widgetSize"
-              placeholder="Widget Size"
-              [(ngModel)]="newWidget.size">
-    </div>
-    <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
-  </form>
+    <form>
+        <div class="form-group">
+            <label>Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="widgetName"
+                    placeholder="Widget Name"
+                    [(ngModel)]="newWidget.name">
+        </div>
+        <div class="form-group">
+            <label>Text</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    name="widgetText"
+                    placeholder="Widget Text"
+                    [(ngModel)]="newWidget.text">
+        </div>
+        <div class="form-group">
+            <label>Size</label>
+            <input
+                    type="number"
+                    class="form-control"
+                    name="widgetSize"
+                    placeholder="Widget Size"
+                    [(ngModel)]="newWidget.size">
+        </div>
+        <button class="btn btn-danger btn-block" (click)="onDelete()">Delete</button>
+    </form>
 </div>
 
 <nav class="navbar fixed-bottom bg-light">
-  <div class="container-fuild col-12">
-    <a routerLink="/user/{{uid}}" class="navbar-link navbar-text float-right cl-icon-padding">
-      <i class="fas fa-user fontawsome_icon"></i>
-    </a>
-  </div>
+    <div class="container-fuild col-12">
+        <a routerLink="/user/{{uid}}" class="navbar-link navbar-text float-right cl-icon-padding">
+            <i class="fas fa-user fontawsome_icon"></i>
+        </a>
+    </div>
 </nav>
 
