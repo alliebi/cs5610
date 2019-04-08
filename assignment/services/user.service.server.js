@@ -113,6 +113,7 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.logOut();
+        req.session.destroy();
         // res.send(200);
     }
 
