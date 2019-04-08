@@ -48,15 +48,6 @@ export class ProfileComponent implements OnInit {
         );
     }
 
-    onUpdateUserOnly() {
-        this.userService.updateUser(this.uid, this.user).subscribe(
-            (user: any) => {
-                this.user = user;
-                this.router.navigate(['/user', user._id, 'website']);
-            }
-        );
-    }
-
     logout() {
         this.userService.logout().subscribe((data: any) => {
             this.sharedService.user = null;
