@@ -66,6 +66,7 @@ export class UserService {
             .pipe(
                 map((res: any) => {
                         const data = res;
+                        this.sharedService.user = null;
                         this.router.navigate(['/login']);
                         return data;
                     }
