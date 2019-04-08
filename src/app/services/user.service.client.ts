@@ -62,7 +62,13 @@ export class UserService {
     logout() {
         this.options.withCredentials = true;
         return this.http
-            .post(this.baseUrl + 'api/logout', '', this.options);
+            .post(this.baseUrl + 'api/logout', '', this.options)
+            .pipe(
+                map((res: any) => {
+                        const data = res;
+                        return data;
+                    }
+                ));
     }
 
     register(username: String, password: String) {
