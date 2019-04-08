@@ -1,6 +1,6 @@
-import {environment} from '../../src/environments/environment';
-
-const connectionString = environment.mongodbUrl;
+// 'mongodb://127.0.0.1:27017/webdev',
+// 'mongodb://admin:abc123456@ds017165.mlab.com:17165/heroku_xhj2gz7c',
+const connectionString = process.env.MONGODB_URI;
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
