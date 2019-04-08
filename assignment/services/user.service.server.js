@@ -113,7 +113,7 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.logOut();
-        res.redirect('/');
+        // res.redirect('/login');
     }
 
     function loggedin(req, res) {
