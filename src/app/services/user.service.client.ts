@@ -39,7 +39,7 @@ export class UserService {
 
     updateUser(userId: String, user) {
         const url = this.baseUrl + 'api/user/' + userId;
-        console.log(url);
+        // console.log(url);
         return this.http.put(url, user);
     }
 
