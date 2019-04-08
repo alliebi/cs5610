@@ -23,7 +23,7 @@ module.exports = function (app) {
     const facebookConfig = {
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
-        callbackURL: process.env.FB_CALLBACK_URL, 
+        callbackURL: process.env.FB_CALLBACK_URL,
     }
 
     passport.serializeUser(serializeUser);
